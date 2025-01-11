@@ -27,7 +27,7 @@ jobs:
                  
       - name: Install dependencies
         run: npm install
-            
+
       - name: Create env file
         run: |
           echo "API_TOKEN=${{ secrets.API_TOKEN }}" >> .env
@@ -43,7 +43,9 @@ jobs:
       - name: Add VPS to known hosts
         run: |
           mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
           ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
         
       - name: Setup SSH Agent
         uses: webfactory/ssh-agent@v0.5.3
