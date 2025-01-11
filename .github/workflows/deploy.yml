@@ -9,7 +9,7 @@ jobs:
     env:
       API_TOKEN: ${{ secrets.API_TOKEN }}
     
-    steps:
+    steps: 
       - uses: actions/checkout@v4
       
       - name: Setup Node.js
