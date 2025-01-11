@@ -1,7 +1,7 @@
 name: Deploy
 on:
   push:
-    branches: [ main ] # Change this to your main branch name
+    branches: [ main ]
 
 jobs:
   deploy:
@@ -29,16 +29,21 @@ jobs:
         env:
           API_TOKEN: ${{ secrets.API_TOKEN }}
         
+      - name: Add VPS to known hosts
+        run: |
+          ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+        
       - name: Deploy to VPS
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
           script: |
-            cd /var/www/html/juhahalmunet
-            git pull origin main
-            npm install
-            echo "API_TOKEN=${{ secrets.API_TOKEN }}" >> .env
-            npm run build
-            pm2 restart ecosystem.config.js
+            cd /var/www/html/juhahalmunet || exit 1
+            git pull origin main || exit 1
+            npm install || exit 1
+            echo "API_TOKEN=${{ secrets.API_TOKEN }}" >> .env || exit 1
+            npm run build || exit 1
+            pm2 restart /var/www/html/juhahalmunet/ecosystem.config.js || exit 1
