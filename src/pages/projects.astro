@@ -1,5 +1,5 @@
 ---
-import { GITHUB_TOKEN } from 'astro:env/server'
+import { API_TOKEN } from 'astro:env/server'
 import HeroImage from '../components/HeroImage.astro'
 import ProjectCard from '../components/ProjectCard.astro'
 import Layout from '../layouts/Layout.astro'
@@ -40,7 +40,7 @@ const GITHUB_API = 'https://api.github.com/graphql'
 // Get GitHub token from environment variable
 //const GITHUB_TOKEN = import.meta.env.GITHUB_TOKEN
 
-if (!GITHUB_TOKEN) {
+if (!API_TOKEN) {
 	throw new Error('GITHUB_TOKEN is not defined in environment variables')
 }
 
@@ -78,7 +78,7 @@ try {
 	const response = await fetch(GITHUB_API, {
 		method: 'POST',
 		headers: {
-			Authorization: `Bearer ${GITHUB_TOKEN}`,
+			Authorization: `Bearer ${API_TOKEN}`,
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify({ query })
