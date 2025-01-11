@@ -52,4 +52,4 @@ jobs:
             npm install || exit 1
             echo "API_TOKEN=${{ secrets.API_TOKEN }}" >> .env || exit 1
             npm run build || exit 1
-            pm2 restart /var/www/html/juhahalmunet/ecosystem.config.js || exit 1
+            pm2 restart /var/www/html/juhahalmunet/ecosystem.config.js || exit 1 
