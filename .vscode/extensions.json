@@ -1,0 +1,4 @@
+{
+	"recommendations": ["astro-build.astro-vscode", "riussi.code-stats-vscode"],
+	"unwantedRecommendations": []
+}

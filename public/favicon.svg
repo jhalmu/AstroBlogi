@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Glow filter -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1" result="blur" />
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.576   0 0 0 0 0.2   0 0 0 0 0.917  0 0 0 1 0" result="glow" />
+      <feMerge>
+        <feMergeNode in="glow" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    
+    <!-- Rotating gradient -->
+    <linearGradient id="rotating-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7c3aed">
+        <animate attributeName="stop-color" 
+          values="#7c3aed; #9333ea; #7c3aed"
+          dur="3s" repeatCount="indefinite" />
+      </stop>
+      <stop offset="100%" stop-color="#9333ea">
+        <animate attributeName="stop-color" 
+          values="#9333ea; #7c3aed; #9333ea"
+          dur="3s" repeatCount="indefinite" />
+      </stop>
+      <animateTransform attributeName="gradientTransform"
+        type="rotate"
+        from="0 16 16"
+        to="360 16 16"
+        dur="10s"
+        repeatCount="indefinite" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="32" height="32" rx="8" fill="#581c87"/>
+  
+  <!-- Glowing border -->
+  <rect width="30" height="30" x="1" y="1" rx="7" 
+    stroke="url(#rotating-gradient)" 
+    stroke-width="0.5" 
+    fill="none" 
+    filter="url(#glow)">
+    <animate attributeName="stroke-width" 
+      values="0.5; 1; 0.5"
+      dur="2s"
+      repeatCount="indefinite" />
+  </rect>
+  
+  <!-- JH Letters -->
+  <g fill="#ffffff" font-family="Poppins, sans-serif" font-weight="700" font-size="16">
+    <text x="16" y="21" text-anchor="middle" filter="url(#glow)">JH</text>
+  </g>
+  
+  <!-- Decorative Element -->
+  <path d="M8 24 L24 24" stroke="url(#rotating-gradient)" stroke-width="1" stroke-linecap="round" filter="url(#glow)">
+    <animate attributeName="stroke-width" 
+      values="1; 1.5; 1"
+      dur="2s"
+      repeatCount="indefinite" />
+  </path>
+</svg>

@@ -1,0 +1,145 @@
+---
+import { GITHUB_TOKEN } from 'astro:env/server'
+import HeroImage from '../components/HeroImage.astro'
+import ProjectCard from '../components/ProjectCard.astro'
+import Layout from '../layouts/Layout.astro'
+
+// Define the GraphQL query
+const query = `
+{
+  user(login: "jhalmu") {
+	repositories(first: 12, orderBy: {field: UPDATED_AT, direction: DESC}) {
+	  nodes {
+		name
+		description
+		url
+		homepageUrl
+		primaryLanguage {
+		  name
+		}
+		stargazerCount
+		forkCount
+		updatedAt
+		repositoryTopics(first: 5) {
+		  nodes {
+			topic {
+			  name
+			}
+		  }
+		}
+		openGraphImageUrl
+	  }
+	}
+  }
+}
+`
+
+// GitHub GraphQL API endpoint
+const GITHUB_API = 'https://api.github.com/graphql'
+
+// Get GitHub token from environment variable
+//const GITHUB_TOKEN = import.meta.env.GITHUB_TOKEN
+
+if (!GITHUB_TOKEN) {
+	throw new Error('GITHUB_TOKEN is not defined in environment variables')
+}
+
+// Define TypeScript interfaces
+interface Repository {
+	name: string
+	description: string | null
+	url: string
+	homepageUrl: string | null
+	primaryLanguage: { name: string } | null
+	stargazerCount: number
+	forkCount: number
+	updatedAt: string
+	repositoryTopics: {
+		nodes: Array<{ topic: { name: string } }>
+	}
+	openGraphImageUrl: string
+}
+
+interface GitHubResponse {
+	data?: {
+		user?: {
+			repositories?: {
+				nodes: Repository[]
+			}
+		}
+	}
+	errors?: Array<{ message: string }>
+}
+
+// Fetch projects with error handling
+let repositories: Repository[] = []
+
+try {
+	const response = await fetch(GITHUB_API, {
+		method: 'POST',
+		headers: {
+			Authorization: `Bearer ${GITHUB_TOKEN}`,
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({ query })
+	})
+
+	if (!response.ok) {
+		throw new Error(`GitHub API responded with status ${response.status}`)
+	}
+
+	const result: GitHubResponse = await response.json()
+
+	if (result.errors) {
+		throw new Error(result.errors.map((e) => e.message).join(', '))
+	}
+
+	repositories = result.data?.user?.repositories?.nodes || []
+} catch (error) {
+	console.error('Failed to fetch GitHub repositories:', error)
+	// Provide fallback data or redirect
+}
+---
+
+<Layout title='Projects | Juha Halmu'>
+	<div class='container mx-auto px-4'>
+		<HeroImage
+			title='Projects'
+			description='My GitHub Projects'
+			image={{
+				src: '/images/projects-hero.jpg',
+				alt: 'Project showcase'
+			}}
+			priority={true}
+		/>
+
+		<div class='mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3'>
+			{
+				repositories.map((repo) => (
+					<ProjectCard
+						name={repo.name}
+						updatedAt={repo.updatedAt}
+						title={repo.name}
+						description={repo.description || ''}
+						url={repo.url}
+						language={repo.primaryLanguage?.name}
+						stars={repo.stargazerCount}
+						forks={repo.forkCount}
+						topics={repo.repositoryTopics.nodes.map((n) => n.topic.name)}
+						image={repo.openGraphImageUrl}
+					/>
+				))
+			}
+		</div>
+		{
+			repositories.length === 0 && (
+				<div class='py-12 text-center' role='alert' aria-live='polite'>
+					<h2 class='mb-4 text-2xl font-bold text-gray-900'>No Projects Found</h2>
+					<p class='text-gray-600'>
+						Please make sure your GitHub token is configured correctly and try again.
+					</p>
+				</div>
+			)
+		}
+	</div>
+</Layout>

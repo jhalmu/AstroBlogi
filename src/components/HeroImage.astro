@@ -1,0 +1,119 @@
+---
+interface Props {
+	image?: {
+		src: string
+		alt: string
+		width?: number
+		height?: number
+	}
+	overlayOpacity?: number
+	tintColor?: string
+	height?: string
+	priority?: boolean
+	title: string
+	excerpt?: string
+	lastUpdated?: string
+	description?: string
+	author?: string
+	tags?: string[]
+}
+
+const { title, lastUpdated, tags = [], author } = Astro.props
+
+//console.log('HeroImage props:', { title, author, lastUpdated })
+
+// Format the date nicely
+const formatDate = (dateString: string) => {
+	if (!dateString) return ''
+	const date = new Date(dateString)
+	return new Intl.DateTimeFormat('en-US', {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric'
+	}).format(date)
+}
+
+const formattedDate = lastUpdated ? formatDate(lastUpdated) : ''
+---
+
+<div class="container mx-auto mt-4 px-4">
+	<section aria-labelledby="hero-title">
+		<!--
+	
+	<div class='container mx-auto px-4' style='margin-top: calc(3.5rem)'>
+		{/* Hero Section */}
+		<HeroImage image={heroImage} title='Blog' description={description} priority={true} />
+
+-->
+
+		{/* Content overlay */}
+		<div class="container mx-auto px-4" style="margin-top: calc(3.5rem)">
+			<div class="text-center">
+				<h1
+					id="hero-title"
+					class="font-montserrat mb-3 text-3xl font-bold leading-tight text-white md:text-4xl lg:text-5xl"
+				>
+					{title}
+				</h1>
+
+				{/* Author */}
+				{
+					author && (
+						<div class="mb-4 flex items-center justify-center">
+							<span class="font-montserrat flex items-center gap-2 text-lg text-white/90">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									class="h-5 w-5"
+									viewBox="0 0 20 20"
+									fill="currentColor"
+								>
+									<path
+										fill-rule="evenodd"
+										d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+										clip-rule="evenodd"
+									/>
+								</svg>
+								{author}
+							</span>
+						</div>
+					)
+				}
+				{/* Tags */}
+				{
+					tags && tags.length > 0 && (
+						<div
+							class="mb-3 flex flex-wrap justify-center gap-2"
+							role="list"
+							aria-label="Post tags"
+						>
+							{tags.map((tag) => (
+								<span
+									class="rounded-full bg-white/20 px-3 py-1 text-sm text-white backdrop-blur-sm"
+									role="listitem"
+								>
+									{tag}
+								</span>
+							))}
+						</div>
+					)
+				}
+				{/* Last Updated */}
+				{
+					formattedDate && (
+						<time datetime={lastUpdated} class="block text-sm text-white/80">
+							Last updated: {formattedDate}
+						</time>
+					)
+				}
+			</div>
+		</div>
+	</section>
+</div>
+
+<style>
+	.text-shadow {
+		text-shadow:
+			0 2px 4px rgba(0, 0, 0, 0.3),
+			0 4px 8px rgba(0, 0, 0, 0.2);
+	}
+</style>

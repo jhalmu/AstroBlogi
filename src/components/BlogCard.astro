@@ -1,0 +1,64 @@
+---
+export interface Props {
+	title: string
+	excerpt?: string
+	description?: string
+	pubDate: Date
+	slug: string
+	author?: string
+	tags?: string[]
+	lang?: string
+	image?: {
+		src: string
+		alt: string
+	}
+}
+const { title, description, pubDate, slug, lang } = Astro.props as Props
+
+// Format date for display
+function formatDate(dateStr: string): string {
+	try {
+		const date = new Date(dateStr)
+		const options: Intl.DateTimeFormatOptions = {
+			year: 'numeric',
+			month: 'long',
+			day: 'numeric'
+		}
+		return date.toLocaleDateString(lang === 'fi' ? 'fi-FI' : 'en-US', options)
+	} catch (error) {
+		console.error(`Error formatting date for post "${title}":`, error)
+		return 'Date unavailable'
+	}
+}
+
+const formattedDate = formatDate(pubDate.toString())
+---
+
+<article
+	class="overflow-hidden rounded-xl bg-purple-600 shadow-lg transition-shadow duration-300 hover:shadow-xl"
+>
+	<div class="p-6">
+		<time datetime={pubDate.toString()} class="mb-2 block text-sm text-purple-300">
+			{formattedDate}
+		</time>
+
+		<h2 class="mb-3 text-2xl font-bold text-purple-100 transition-colors hover:text-purple-400">
+			<a href={`/blog/${slug}`}>
+				{title}
+			</a>
+		</h2>
+			<p class="mb-4 line-clamp-3 text-purple-200">
+				{description}
+			</p>
+
+			<div class='flex flex-wrap gap-2'>
+			{
+				(Astro.props.tags ?? []).map((tag) => (
+					<span class='rounded-full bg-purple-200 px-3 py-1 text-sm text-purple-800 transition-colors hover:bg-purple-200'>
+						#{tag}
+					</span>
+				))
+			}
+		</div>
+	</div>
+</article>

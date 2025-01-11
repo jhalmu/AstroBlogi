@@ -1,0 +1,92 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import BlogCard from '../../components/BlogCard.astro'
+import HeroImage from '../../components/HeroImage.astro'
+import { getCollection } from 'astro:content'
+import { sortBlogPosts } from '../../utils/content'
+
+// Pagination settings
+const POSTS_PER_PAGE = 6
+const currentPage = 1
+
+// Get and validate blog posts
+const allPosts = await getCollection('blog')
+const validPosts = allPosts
+const sortedPosts = sortBlogPosts(validPosts)
+
+// Calculate pagination
+const totalPages = Math.ceil(sortedPosts.length / POSTS_PER_PAGE)
+const start = (currentPage - 1) * POSTS_PER_PAGE
+const end = start + POSTS_PER_PAGE
+const paginatedPosts = sortedPosts.slice(start, end)
+
+// // Hero image for the blog index
+// const heroImage = {
+// 	src: '/images/blog/default-hero.jpg',
+// 	alt: 'Welcome to my blog',
+// 	width: 1200,
+// 	height: 630,
+// 	priority: true
+// }
+
+const description = 'Polokan tahtiin!'
+
+interface Props {
+	author: string
+}
+
+const { author } = Astro.props
+
+// Get next page title for navigation
+const nextPageTitle = sortedPosts[POSTS_PER_PAGE]?.data.title
+---
+
+<Layout title="Blog | Juha Halmu">
+	<div class="container mx-auto px-4" style="margin-top: calc(3.5rem)">
+		{/* Hero Section */}
+		<HeroImage
+			title="Blog"
+			description={description}
+			priority={true}
+			author={author}
+		/>
+
+		{/* Blog Posts Grid */}
+		<div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+			{
+				paginatedPosts.map((post) => (
+					<BlogCard
+						title={post.data.title ?? ''}
+						excerpt={post.body ?? ''}
+						description={post.data.description}
+						pubDate={post.data.pubDate || new Date()}
+						slug={post.id}
+					/>
+				))
+			}
+		</div>
+
+		{/* Pagination */}
+		{
+			totalPages > 1 && (
+				<nav class="mb-24 mt-12 flex justify-center gap-4" aria-label="Blog pagination">
+					<a
+						href="/blog/2"
+						class="inline-flex items-center rounded-lg bg-purple-600 px-6 py-3 text-white transition-colors duration-200 hover:bg-purple-700"
+						aria-label={`Go to next page${nextPageTitle ? ` (${nextPageTitle})` : ''}`}
+					>
+						<span>Next</span>
+						{nextPageTitle && (
+							<span class="ml-2 text-sm opacity-75" aria-hidden="true">
+								({nextPageTitle})
+							</span>
+						)}
+						<span aria-hidden="true" class="ml-2">
+							→
+						</span>
+					</a>
+				</nav>
+			)
+		}
+	</div>
+</Layout>

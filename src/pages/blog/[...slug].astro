@@ -1,0 +1,182 @@
+---
+import Prose from '../../components/Prose.astro'
+import type { CollectionEntry } from 'astro:content'
+import { getCollection } from 'astro:content'
+import HeroImage from '../../components/HeroImage.astro'
+import Layout from '../../layouts/Layout.astro'
+import { render } from 'astro:content'
+import '../../styles/blog.css'
+
+// Tell Astro to prerender this page as static HTML
+export const prerender = true
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog')
+	return posts.map((post) => ({
+		params: { slug: post.id },
+		props: post
+	}))
+}
+type Props = CollectionEntry<'blog'> & {
+	data: {
+		author: string
+		tags: string[]
+	}
+	author?: string
+	tags?: string[]
+}
+
+const post = Astro.props
+const { Content } = await render(post)
+
+// Function to get preview text from content
+function getContentPreview(content: string): string {
+	// Remove HTML tags and markdown syntax
+	const cleanText = content
+		.replace(/<[^>]*>/g, '') // Remove HTML tags
+		.replace(/[#*`_~\[\]]/g, '') // Remove markdown syntax
+		.replace(/\n+/g, ' ') // Replace newlines with spaces
+		.trim()
+
+	// Get first 160 characters, try to end at a complete sentence or word
+	const maxLength = 160
+	if (cleanText.length <= maxLength) return cleanText
+
+	const truncated = cleanText.slice(0, maxLength)
+	const lastPeriod = truncated.lastIndexOf('.')
+	const lastSpace = truncated.lastIndexOf(' ')
+
+	// Try to end at a sentence, otherwise end at a word
+	const endIndex = lastPeriod > maxLength * 0.5 ? lastPeriod + 1 : lastSpace
+	return truncated.slice(0, endIndex) + '...'
+}
+
+// Get the description text
+const description = post.data.description || (post.body ? getContentPreview(post.body) : '')
+---
+
+<Layout
+	title={post.data.title}
+	description={description}
+	type="article"
+	publishDate={post.data.pubDate?.toISOString()}
+	author={post.data.author || Astro.props.author}
+	tags={post.data.tags || Astro.props.tags}
+>
+	<main>
+		<HeroImage
+			title={post.data.title}
+			description={description}
+			overlayOpacity={50}
+			lastUpdated={post.data.pubDate?.toISOString()}
+			priority={true}
+			author={post.data.author || Astro.props.author}
+			tags={post.data.tags}
+		/>
+
+		<div class="container mx-auto max-w-3xl px-4 py-8 pb-24">
+			<article class="blog-content">
+				<Prose>
+					<Content />
+				</Prose>
+			</article>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	.blog-content {
+		line-height: 1.8;
+		border-radius: 20px;
+		padding: 1.5em;
+	}
+
+	.blog-content :global(h1) {
+		font-weight: 600;
+		margin-top: 1.5em;
+		margin-bottom: 0.5em;
+		text-decoration: none;
+	}
+
+	.blog-content :global(h2) {
+		font-weight: 400;
+		margin-top: 1em;
+		margin-bottom: 0.5em;
+		text-decoration: none;
+	}
+	.blog-content :global(h3) {
+		font-weight: 200;
+		margin-top: 1em;
+
+		text-decoration: none;
+	}
+	.blog-content :global(h4),
+	.blog-content :global(h5),
+	.blog-content :global(h6) {
+		font-weight: 600;
+		margin-top: 2em;
+		margin-bottom: 1em;
+		text-decoration: none;
+	}
+
+	.blog-content :global(h1) {
+		font-size: 2.25em;
+	}
+
+	.blog-content :global(h2) {
+		font-size: 1.875em;
+	}
+
+	.blog-content :global(h3) {
+		font-size: 1.5em;
+	}
+
+	.blog-content :global(p) {
+		margin-bottom: 0.25em;
+	}
+
+	.blog-content :global(ul),
+	.blog-content :global(ol) {
+		margin-left: 1.5em;
+		margin-bottom: 0.5em;
+	}
+
+	.blog-content :global(li) {
+		margin-bottom: 0.5em;
+	}
+
+	.blog-content :global(pre) {
+		padding: 1em;
+		border-radius: 0.5em;
+		margin: 1.5em 0;
+		overflow-x: auto;
+	}
+
+	.blog-content :global(code) {
+		font-family: 'Fira Code', monospace;
+		font-size: 0.9em;
+	}
+
+	.blog-content :global(blockquote) {
+		border-left: 4px solid #e2e8f0;
+		padding-left: 1em;
+		margin: 1.5em 0;
+		color: #4a5568;
+	}
+
+	.blog-content :global(img) {
+		max-width: 100%;
+		height: auto;
+		border-radius: 0.5em;
+		margin: 1.5em 0;
+	}
+
+	.blog-content :global(a) {
+		color: #4a5568;
+		text-decoration: underline;
+	}
+
+	.blog-content :global(a:hover) {
+		color: #2d3748;
+	}
+</style>

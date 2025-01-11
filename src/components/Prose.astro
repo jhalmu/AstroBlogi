@@ -1,0 +1,90 @@
+---
+
+---
+
+<div
+	class="prose dark:prose-invert prose-headings:underline prose-h1:text-xl prose-h1:font-bold prose-p:text-justify prose-a:text-blue-600 prose-img:rounded-xl"
+>
+	<slot />
+</div>
+
+<style>
+	.blog-content {
+		line-height: 1.8;
+		background-color: #e2e8f0;
+		border-radius: 20px;
+		padding: 1.5em;
+	}
+
+	.blog-content :global(h1),
+	.blog-content :global(h2),
+	.blog-content :global(h3),
+	.blog-content :global(h4),
+	.blog-content :global(h5),
+	.blog-content :global(h6) {
+		font-weight: 600;
+		margin-top: 2em;
+		margin-bottom: 1em;
+	}
+
+	.blog-content :global(h1) {
+		font-size: 2.25em;
+	}
+
+	.blog-content :global(h2) {
+		font-size: 1.875em;
+	}
+
+	.blog-content :global(h3) {
+		font-size: 1.5em;
+	}
+
+	.blog-content :global(p) {
+		margin-bottom: 1.5em;
+	}
+
+	.blog-content :global(ul),
+	.blog-content :global(ol) {
+		margin-left: 2em;
+		margin-bottom: 1.5em;
+	}
+
+	.blog-content :global(li) {
+		margin-bottom: 0.5em;
+	}
+
+	.blog-content :global(pre) {
+		padding: 1em;
+		border-radius: 0.5em;
+		margin: 1.5em 0;
+		overflow-x: auto;
+	}
+
+	.blog-content :global(code) {
+		font-family: 'Fira Code', monospace;
+		font-size: 0.9em;
+	}
+
+	.blog-content :global(blockquote) {
+		border-left: 4px solid #e2e8f0;
+		padding-left: 1em;
+		margin: 1.5em 0;
+		color: #4a5568;
+	}
+
+	.blog-content :global(img) {
+		max-width: 100%;
+		height: auto;
+		border-radius: 0.5em;
+		margin: 1.5em 0;
+	}
+
+	.blog-content :global(a) {
+		color: #4a5568;
+		text-decoration: underline;
+	}
+
+	.blog-content :global(a:hover) {
+		color: #2d3748;
+	}
+</style>

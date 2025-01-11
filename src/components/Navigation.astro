@@ -1,0 +1,104 @@
+---
+import SocialLinks from './SocialLinks.astro'
+
+const navItems = [
+	{ href: '/', text: 'Alku' },
+	{ href: '/blog', text: 'Blogi' },
+	{ href: '/projects', text: 'Projektit' },
+	{ href: '/about', text: 'Tietoja' }
+]
+
+const currentPath = Astro.url.pathname
+---
+
+<nav class="relative bg-gradient-to-b from-purple-900" aria-label="Main navigation">
+	<!-- Inverted mountain background -->
+	<div
+		class="absolute inset-0 bg-cover bg-bottom bg-no-repeat"
+		style="background-image: url('/mountains-nav.svg')"
+		aria-hidden="true"
+	>
+	</div>
+
+	<!-- Navigation content -->
+	<div class="relative z-10 mx-auto flex w-full max-w-4xl flex-col">
+		<!-- Top navigation links -->
+		<div
+			class="flex justify-start p-8 md:justify-end lg:justify-end"
+			role="complementary"
+			aria-label="Social links"
+		>
+			<SocialLinks />
+		</div>
+
+		<!-- Main navigation -->
+		<div class="flex items-center space-x-8 px-8 pb-4">
+			<div class="flex items-baseline space-x-16">
+				<h1
+					class="text-shadow whitespace-nowrap font-['Abril_Fatface'] text-3xl tracking-normal text-purple-100 opacity-80 transition-opacity duration-300 hover:opacity-90 md:text-5xl lg:text-6xl"
+					id="site-title"
+				>
+					<span class="tracking-normal">Juha</span>{' '}
+					<span class="tracking-normal">Halmu</span>
+				</h1>
+
+				<div class="flex space-x-10" role="menubar" aria-label="Main menu">
+					{
+						navItems.map((item) => {
+							const isActive =
+								currentPath === item.href ||
+								(item.href !== '/' && currentPath.startsWith(item.href))
+							return (
+								<a
+									href={item.href}
+									class={`text-purple-50 opacity-80 transition-opacity duration-300 hover:opacity-100 md:text-lg ${
+										isActive ? 'font-bold underline' : ''
+									}`}
+									role="menuitem"
+									aria-current={isActive ? 'page' : undefined}
+								>
+									{item.text}
+								</a>
+							)
+						})
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</nav>
+
+<script>
+	// Add keyboard navigation
+	const menuItems = document.querySelectorAll<HTMLAnchorElement>('[role="menuitem"]')
+	const menuItemsArray = Array.from(menuItems)
+
+	menuItemsArray.forEach((item, index) => {
+		item.addEventListener('keydown', (e) => {
+			let targetItem: HTMLAnchorElement | undefined
+
+			switch (e.key) {
+				case 'ArrowRight':
+				case 'ArrowDown':
+					e.preventDefault()
+					targetItem = menuItemsArray[index + 1] || menuItemsArray[0]
+					break
+				case 'ArrowLeft':
+				case 'ArrowUp':
+					e.preventDefault()
+					targetItem = menuItemsArray[index - 1] || menuItemsArray[menuItemsArray.length - 1]
+					break
+				case 'Home':
+					e.preventDefault()
+					targetItem = menuItemsArray[0]
+					break
+				case 'End':
+					e.preventDefault()
+					targetItem = menuItemsArray[menuItemsArray.length - 1]
+					break
+			}
+
+			targetItem?.focus()
+		})
+	})
+</script>

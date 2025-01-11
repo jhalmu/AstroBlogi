@@ -1,0 +1,60 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Hero from '../components/Hero.astro'
+import BlogCard from '../components/BlogCard.astro'
+import { getCollection } from 'astro:content'
+import type { CollectionEntry } from 'astro:content'
+
+const posts = (await getCollection('blog'))
+	.sort(
+		(a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) =>
+			new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
+	)
+	.slice(0, 3)
+
+const title = "Juha Halmu's Blog"
+const description = 'Technology, Photography, and Local History'
+---
+
+<Layout title={title} description={description}>
+	<main>
+		<Hero />
+
+		<section class="bg-transparent-400 mt-4 rounded-2xl py-16">
+			<div class="container mx-auto px-4">
+				<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+					{
+						posts.map((post) => (
+							<BlogCard
+								title={post.data.title}
+								description={post.data.description}
+								pubDate={post.data.pubDate}
+								slug={post.id}
+							/>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<!-- <section class='py-16'>
+		<div class='container mx-auto px-4 text-center'>
+			<h2 class='mb-8 text-3xl font-bold'>Latest Articles</h2>
+			<a
+				href='/blog'
+				class='inline-block rounded-lg bg-purple-600 px-6 py-3 text-white transition-colors hover:bg-purple-700'
+			>
+				View All Posts
+			</a>
+		</div>
+	</section> -->
+	</main>
+</Layout>
+
+<style>
+	@media (max-width: 640px) {
+		article {
+			padding: 0 0.5rem;
+		}
+	}
+</style>

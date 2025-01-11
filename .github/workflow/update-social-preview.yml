@@ -1,0 +1,21 @@
+name: Update Social Preview
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-social-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Upload social preview image
+        run: |
+          curl -X POST \
+          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          -F "image=@./public/images/default-hero.jpg" \
+          https://api.github.com/repos/${{ github.repository }}/social_preview
