@@ -19,4 +19,4 @@ module.exports = {
         max_restarts: 10,
         autorestart: true
     }]
-}
+} 
