@@ -10,8 +10,7 @@ export default defineConfig({
 	site: 'https://juhahalmu.net',
 	env: {
 		schema: {
-			API_TOKEN: envField.string({ context: "server", access: "secret" }),
-			GITHUB_TOKEN: envField.string({ context: "server", access: "secret" }),
+			API_TOKEN: envField.string({ context: "server", access: "secret" })
 		}
 	},
 	prefetch: {
