@@ -79,7 +79,7 @@ jobs:
               cp .env .env.backup
             fi
             
-            # Päivitetään repo
+            # Päivitetään repository
             git fetch origin main || exit 1
             git reset --hard origin/main || exit 1
             
