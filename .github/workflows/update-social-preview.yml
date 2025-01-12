@@ -1,49 +1,45 @@
-name: Deploy
+name: Update Social Preview
+
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+
+permissions:
+  contents: write
+
 
 jobs:
-  deploy:
+  update-social-preview:
     runs-on: ubuntu-latest
-    env:
-      API_TOKEN: ${{ secrets.API_TOKEN }}
-    
     steps:
-      - uses: actions/checkout@v4
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Print repository metadata
+        run: |
+          echo "Repository name: $GITHUB_REPOSITORY"
+          echo "Repository owner: $GITHUB_REPOSITORY_OWNER"
+      - name: Check if image exists
+        run: |
+          if [ ! -f "./public/images/default-hero.jpg" ]; then
+            echo "❌ Error: Image file not found at ./public/images/default-hero.jpg"
+            exit 1
+          fi
+          echo "✅ Image file found"
+          ls -l "./public/images/default-hero.jpg"
+      - name: Upload social preview image
+        run: |
+          echo "Updating repository settings..."
+          RESPONSE=$(curl -w "\n%{http_code}" \
+            -X PATCH \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Content-Type: application/json" \
+            https://api.github.com/repos/${{ github.repository }} \
+            -d "{\"name\":\"${{ github.event.repository.name }}\",\"default_branch\":\"main\",\"private\":false}")
           
-      - name: Install dependencies
-        run: npm install
-        
-      - name: Create env file
-        run: |
-          echo "API_TOKEN=${{ secrets.API_TOKEN }}" >> .env
-        
-      - name: Build
-        run: npm run build
-        env:
-          API_TOKEN: ${{ secrets.API_TOKEN }}
-        
-      - name: Add VPS to known hosts
-        run: |
-          ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
-        
-      - name: Deploy to VPS
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          script: |
-            cd /var/www/html/juhahalmunet || exit 1
-            git pull origin main || exit 1
-            npm install || exit 1
-            echo "API_TOKEN=${{ secrets.API_TOKEN }}" >> .env || exit 1
-            npm run build || exit 1
-            pm2 restart /var/www/html/juhahalmunet/ecosystem.config.js || exit 1
+          HTTP_STATUS=$(echo "$RESPONSE" | tail -n1)
+          if [ "$HTTP_STATUS" -ne 200 ]; then
+            echo "❌ Error updating repository settings. Status: $HTTP_STATUS"
+            echo "$RESPONSE" | head -n-1
