@@ -1,47 +1,63 @@
-name: Deploy
+name: Deploy to VPS
+
 on:
   push:
     branches: [ main ]
+  # Mahdollisuus ajaa workflow manuaalisesti
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      API_TOKEN: ${{ secrets.API_TOKEN }}
     
-    steps: 
-      - uses: actions/checkout@v4
+    # Määritellään ympäristömuuttujat
+    env:
+      NODE_VERSION: 20
+      API_TOKEN: ${{ secrets.API_TOKEN }}
       
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Haetaan koko historia
+          
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'  # Käytetään npm välimuistia
           
-      - name: Cache Node modules
+      # Tehokkaampi npm cache
+      - name: Cache dependencies
         uses: actions/cache@v3
+        id: npm-cache
         with:
-          path: ~/.npm
-          key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+          path: |
+            **/node_modules
+            ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.OS }}-node-   
-                 
+            ${{ runner.os }}-npm-
+            
       - name: Install dependencies
-        run: npm install
-
-      - name: Create env file
-        run: |
-          echo "API_TOKEN=${{ secrets.API_TOKEN }}" >> .env
+        # Asennetaan vain jos cache miss
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm ci  # Käytetään 'ci' 'install' sijaan
         
-      - name: Build
+      - name: Create .env file
+        run: |
+          echo "API_TOKEN=${{ secrets.API_TOKEN }}" > .env
+          
+      - name: Build project
         run: npm run build
         env:
-          API_TOKEN: ${{ secrets.API_TOKEN }} 
-
-      - name: Setup SSH Agent
-        uses: webfactory/ssh-agent@v0.5.3
+          API_TOKEN: ${{ secrets.API_TOKEN }}
+          
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.8.0  # Päivitetty versio
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-        
+          
       - name: Deploy to VPS
         uses: appleboy/ssh-action@master
         with:
@@ -50,9 +66,36 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
+            # Asetetaan Node.js versio
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm use 20
+            
+            # Siirrytään projektikansioon
             cd /var/www/html/juhahalmunet || exit 1
-            git pull origin main || exit 1
-            npm install || exit 1
-            echo "API_TOKEN=${{ secrets.API_TOKEN }}" >> .env || exit 1
+            
+            # Varmuuskopio .env tiedostosta
+            if [ -f .env ]; then
+              cp .env .env.backup
+            fi
+            
+            # Päivitetään repo
+            git fetch origin main || exit 1
+            git reset --hard origin/main || exit 1
+            
+            # Asennetaan riippuvuudet tuotantotilassa
+            npm ci --production || exit 1
+            
+            # Luodaan/päivitetään .env
+            echo "API_TOKEN=${{ secrets.API_TOKEN }}" > .env
+            
+            # Rakennetaan projekti
             npm run build || exit 1
-            pm2 restart /var/www/html/juhahalmunet/ecosystem.config.js || exit 1 
+            
+            # Käynnistetään PM2 uudelleen
+            pm2 reload /var/www/html/juhahalmunet/ecosystem.config.js --update-env || exit 1
+            
+            # Siivotaan npm cache
+            npm cache clean --force
+            
+            echo "Deployment completed successfully!"
