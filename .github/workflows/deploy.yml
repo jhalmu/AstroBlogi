@@ -17,7 +17,7 @@ jobs:
       
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
         with:
           fetch-depth: 0  # Haetaan koko historia
           
@@ -57,7 +57,14 @@ jobs:
         uses: webfactory/ssh-agent@v0.8.0  # Päivitetty versio
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          
+
+      - name: Set up SSH 2
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+        
       - name: Deploy to VPS
         uses: appleboy/ssh-action@master
         with:
