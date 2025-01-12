@@ -36,8 +36,6 @@ jobs:
         run: npm run build
         env:
           API_TOKEN: ${{ secrets.API_TOKEN }}
-        
-      
 
       - name: Setup SSH Agent
         uses: webfactory/ssh-agent@v0.5.3
