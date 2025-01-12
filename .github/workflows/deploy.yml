@@ -53,7 +53,7 @@ jobs:
         env:
           API_TOKEN: ${{ secrets.API_TOKEN }}
           
-      - name: Setup SSH
+      - name: Setup SSHH
         uses: webfactory/ssh-agent@v0.8.0  # Päivitetty versio
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
