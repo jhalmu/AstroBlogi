@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     apps: [{
         name: "astro-app",
         script: "./dist/server/entry.mjs",
@@ -19,4 +19,4 @@ module.exports = {
         max_restarts: 10,
         autorestart: true
     }]
-} 
+}
