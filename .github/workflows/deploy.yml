@@ -27,7 +27,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'  # Käytetään npm välimuistia
           
-      # Tehokkaampi npm cache
+      # Tehokkaampi npm cache cc
       - name: Cache dependencies
         uses: actions/cache@v3
         id: npm-cache
