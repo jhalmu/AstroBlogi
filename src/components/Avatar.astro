@@ -10,9 +10,9 @@ interface Props {
 const {
 	src = '/avatar.jpg',
 	alt = 'Juha Halmu',
-	size = 'md',
+	size = 'lg',
 	opacity = 1,
-	tint = 'none'
+	tint = '#9333EA'
 } = Astro.props
 
 const sizes = {
@@ -29,26 +29,26 @@ const style = `
 `
 ---
 
-<div class="avatar-super-wrapper" style={style}>
+<div class='avatar-super-wrapper' style={style}>
 	<!-- Orbital rings -->
-	<div class="orbital-ring ring1"></div>
-	<div class="orbital-ring ring2"></div>
-	<div class="orbital-ring ring3"></div>
+	<div class='orbital-ring ring1'></div>
+	<div class='orbital-ring ring2'></div>
+	<div class='orbital-ring ring3'></div>
 
-	<div class="avatar-wrapper">
+	<div class='avatar-wrapper'>
 		<!-- Intense glow layers -->
-		<div class="glow-layers">
-			<div class="glow-layer layer1"></div>
-			<div class="glow-layer layer2"></div>
-			<div class="glow-layer layer3"></div>
+		<div class='glow-layers'>
+			<div class='glow-layer layer1'></div>
+			<div class='glow-layer layer2'></div>
+			<div class='glow-layer layer3'></div>
 		</div>
 
 		<!-- Box shadow container -->
-		<div class="shadow-container">
+		<div class='shadow-container'>
 			<!-- Avatar image -->
 			<div class={`avatar-container ${sizes[size]}`}>
-				<img src={src} alt={alt} class="h-full w-full rounded-full object-cover" />
-				{tint !== 'none' && <div class="tint-overlay" />}
+				<img src={src} alt={alt} class='h-full w-full rounded-full object-cover' />
+				{tint !== 'none' && <div class='tint-overlay' />}
 			</div>
 		</div>
 	</div>

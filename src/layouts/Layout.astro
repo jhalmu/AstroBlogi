@@ -2,6 +2,7 @@
 import Footer from '../components/Footer.astro'
 import Navigation from '../components/Navigation.astro'
 import '../styles/global.css'
+import { ClientRouter } from 'astro:transitions'
 
 export interface Props {
 	title: string
@@ -12,6 +13,7 @@ export interface Props {
 	publishDate?: string
 	author?: string
 	tags?: string[]
+	lang?: string
 }
 
 const {
@@ -22,7 +24,8 @@ const {
 	type = 'website',
 	publishDate,
 	author = 'Juha Halmu',
-	tags = []
+	tags = [],
+	lang = Astro.params.lang || 'fi'
 } = Astro.props
 
 // Format tags for meta keywords
@@ -46,87 +49,87 @@ const structuredData = {
 ---
 
 <!doctype html>
-<html lang="fi">
+<html lang={lang}>
 	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+		<meta charset='UTF-8' />
+		<meta name='viewport' content='width=device-width, initial-scale=1.0' />
+		<ClientRouter />
 		<!-- Primary Meta Tags -->
 		<title>{title}</title>
-		<meta name="title" content={title} />
-		<meta name="description" content={description} />
-		<meta name="keywords" content={formattedTags} />
-		<meta name="author" content={author} />
+		<meta name='title' content={title} />
+		<meta name='description' content={description} />
+		<meta name='keywords' content={formattedTags} />
+		<meta name='author' content={author} />
 
 		<!-- Canonical URL -->
-		<link rel="canonical" href={canonicalURL} />
+		<link rel='canonical' href={canonicalURL} />
 
 		<!-- Open Graph / Facebook -->
-		<meta property="og:type" content={type} />
-		<meta property="og:url" content={canonicalURL} />
-		<meta property="og:title" content={title} />
-		<meta property="og:description" content={description} />
-		<meta property="og:image" content={new URL(image, Astro.url)} />
+		<meta property='og:type' content={type} />
+		<meta property='og:url' content={canonicalURL} />
+		<meta property='og:title' content={title} />
+		<meta property='og:description' content={description} />
+		<meta property='og:image' content={new URL(image, Astro.url)} />
 
 		<!-- Twitter -->
-		<meta property="twitter:card" content="summary_large_image" />
-		<meta property="twitter:url" content={canonicalURL} />
-		<meta property="twitter:title" content={title} />
-		<meta property="twitter:description" content={description} />
-		<meta property="twitter:image" content={new URL(image, Astro.url)} />
+		<meta property='twitter:card' content='summary_large_image' />
+		<meta property='twitter:url' content={canonicalURL} />
+		<meta property='twitter:title' content={title} />
+		<meta property='twitter:description' content={description} />
+		<meta property='twitter:image' content={new URL(image, Astro.url)} />
 
 		<!-- Favicon -->
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-		<link rel="manifest" href="/site.webmanifest" />
+		<link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+		<link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png' />
+		<link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png' />
+		<link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png' />
+		<link rel='manifest' href='/site.webmanifest' />
 
 		<!-- Fonts -->
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel='preconnect' href='https://fonts.googleapis.com' />
+		<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@400;700&family=Montserrat:wght@300;400;600;700&family=Poppins:wght@400;500;600;700&family=Abril+Fatface&display=swap"
-			rel="stylesheet"
+			href='https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@400;700&family=Montserrat:wght@300;400;600;700&family=Poppins:wght@400;500;600;700&family=Abril+Fatface&display=swap'
+			rel='stylesheet'
 		/>
 
 		<!-- Structured Data -->
-		<script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+		<script is:inline type='application/ld+json' set:html={JSON.stringify(structuredData)} />
 
 		<!-- RSS Feed -->
-		<link rel="alternate" type="application/rss+xml" title={`${title} RSS Feed`} href="/rss.xml" />
+		<link rel='alternate' type='application/rss+xml' title={`${title} RSS Feed`} href='/rss.xml' />
 
-		<meta name="generator" content={Astro.generator} />
+		<meta name='generator' content={Astro.generator} />
 	</head>
 	<body
-		class="grid min-h-screen grid-rows-[auto_1fr_auto] bg-gradient-to-b from-purple-950 via-purple-900 to-purple-800"
+		class='grid min-h-screen grid-rows-[auto_1fr_auto] bg-gradient-to-b from-purple-950 via-purple-900 to-purple-800'
 	>
 		<!-- Background mountain -->
 		<div
-			class="pointer-events-none fixed bottom-0 left-0 right-0 h-[50vh] bg-cover bg-bottom bg-no-repeat"
+			class='pointer-events-none fixed bottom-0 left-0 right-0 h-[50vh] bg-cover bg-bottom bg-no-repeat'
 			style="background-image: url('/mountains.svg')"
 		>
 		</div>
 
 		<!-- Skip to main content link -->
 		<a
-			href="#main-content"
-			class="sr-only focus:not-sr-only focus:absolute focus:left-0 focus:top-0 focus:z-50 focus:bg-white focus:p-4 focus:text-purple-900"
+			href='#main-content'
+			class='sr-only focus:not-sr-only focus:absolute focus:left-0 focus:top-0 focus:z-50 focus:bg-white focus:p-4 focus:text-purple-900'
 		>
 			Skip to main content
 		</a>
 
-		<header class="relative z-10">
+		<header class='relative z-10'>
 			<Navigation />
 		</header>
 
-		<main id="main-content" class="z-10">
-			<div class="blog-content mx-auto w-full max-w-4xl px-8 py-4">
+		<main id='main-content' class='z-10' transition:animate='slide'>
+			<div class='blog-content mx-auto mt-8 max-w-3xl	pb-10 px-16'>
 				<slot />
 			</div>
 		</main>
 
-		<footer class="relative z-10">
+		<footer class='relative z-10'>
 			<Footer />
 		</footer>
 	</body>

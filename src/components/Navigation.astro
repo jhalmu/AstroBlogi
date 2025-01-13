@@ -1,5 +1,6 @@
 ---
 import SocialLinks from './SocialLinks.astro'
+import ProfileImage from './ProfileImage.astro'
 
 const navItems = [
 	{ href: '/', text: 'Alku' },
@@ -11,58 +12,66 @@ const navItems = [
 const currentPath = Astro.url.pathname
 ---
 
-<nav class="relative bg-gradient-to-b from-purple-900" aria-label="Main navigation">
+<nav class='relative bg-gradient-to-b from-purple-900' aria-label='Main navigation'>
 	<!-- Inverted mountain background -->
 	<div
-		class="absolute inset-0 bg-cover bg-bottom bg-no-repeat"
+		class='absolute inset-0 bg-cover bg-bottom bg-no-repeat'
 		style="background-image: url('/mountains-nav.svg')"
-		aria-hidden="true"
+		aria-hidden='true'
 	>
 	</div>
 
 	<!-- Navigation content -->
-	<div class="relative z-10 mx-auto flex w-full max-w-4xl flex-col">
+	<div class='relative z-10 mx-auto w-full max-w-2xl'>
 		<!-- Top navigation links -->
 		<div
-			class="flex justify-start p-8 md:justify-end lg:justify-end"
-			role="complementary"
-			aria-label="Social links"
+			class='flex justify-start p-8 md:justify-end lg:justify-end'
+			role='complementary'
+			aria-label='Social links'
 		>
 			<SocialLinks />
 		</div>
 
 		<!-- Main navigation -->
-		<div class="flex items-center space-x-8 px-8 pb-4">
-			<div class="flex items-baseline space-x-16">
-				<h1
-					class="text-shadow whitespace-nowrap font-['Abril_Fatface'] text-3xl tracking-normal text-purple-100 opacity-80 transition-opacity duration-300 hover:opacity-90 md:text-5xl lg:text-6xl"
-					id="site-title"
-				>
-					<span class="tracking-normal">Juha</span>{' '}
-					<span class="tracking-normal">Halmu</span>
-				</h1>
-
-				<div class="flex space-x-10" role="menubar" aria-label="Main menu">
-					{
-						navItems.map((item) => {
-							const isActive =
-								currentPath === item.href ||
-								(item.href !== '/' && currentPath.startsWith(item.href))
-							return (
-								<a
-									href={item.href}
-									class={`text-purple-50 opacity-80 transition-opacity duration-300 hover:opacity-100 md:text-lg ${
-										isActive ? 'font-bold underline' : ''
-									}`}
-									role="menuitem"
-									aria-current={isActive ? 'page' : undefined}
-								>
-									{item.text}
-								</a>
-							)
-						})
-					}
+		<div id='nav_wrapper' class='grid grid-cols-1'>
+			<div id='brand' class='items-center justify-between px-4'>
+				<div class='flex items-baseline space-x-4'>
+					<a href="/" class='flex items-center '>
+						<ProfileImage alt="Blog author's profile picture" />
+					</a>
+					<h1
+						class="text-shadow whitespace-nowrap font-['Abril_Fatface'] text-6xl tracking-normal text-purple-100 opacity-80 transition-opacity duration-300 hover:opacity-90 "
+						id='site-title'
+					>
+						<span class='tracking-normal'>Juha</span>{' '}
+						<span class='tracking-normal'>Halmu</span>
+					</h1>
 				</div>
+			</div>
+			<div
+				id='nav_menu'
+				class='flex flex-row space-x-4 px-4 pl-8'
+				role='menubar'
+				aria-label='Main menu'
+			>
+				{
+					navItems.map((item) => {
+						const isActive =
+							currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href))
+						return (
+							<a
+								href={item.href}
+								class={`text-purple-50 opacity-80 transition-opacity duration-300 hover:opacity-100 md:text-lg  ${
+									isActive ? 'font-bold underline' : ''
+								}`}
+								role='menuitem'
+								aria-current={isActive ? 'page' : undefined}
+							>
+								{item.text}
+							</a>
+						)
+					})
+				}
 			</div>
 		</div>
 	</div>

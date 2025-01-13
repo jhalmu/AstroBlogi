@@ -2,33 +2,37 @@
 import Avatar from './Avatar.astro'
 ---
 
-<section class="relative mt-8 overflow-hidden rounded-3xl py-20 md:py-32">
+<section
+	class='relative mt-8 w-80 overflow-hidden rounded-3xl py-20 sm:w-full md:w-full md:py-32 lg:w-full'
+>
 	<div
-		class="absolute inset-0 rounded-3xl bg-[radial-gradient(circle_at_-20%_-20%,#1e40af,#1e40af_20%,#581c87_40%,#6b21a8_60%,#7e22ce_80%,#1e40af_100%)] opacity-90"
+		class='absolute inset-0 rounded-3xl bg-[radial-gradient(circle_at_-20%_-20%,#1e40af,#1e40af_20%,#581c87_40%,#6b21a8_60%,#7e22ce_80%,#1e40af_100%)] opacity-90'
 	>
 	</div>
 	<div
-		class="absolute inset-0 rounded-3xl bg-[radial-gradient(circle_at_-20%_-20%,rgba(255,255,255,0.2),transparent_70%)]"
+		class='absolute inset-0 rounded-3xl bg-[radial-gradient(circle_at_-20%_-20%,rgba(255,255,255,0.2),transparent_70%)]'
 	>
 	</div>
 
 	<!-- Large Avatar Background -->
-	<div class="absolute -left-[22%] -top-10">
-		<Avatar size="2xl" opacity={0.4} tint="rgba(255, 255, 255, 0.3)" />
+	<div class='absolute -left-[22%] -top-10 max-w-80 sm:w-full md:w-full lg:w-full'>
+		<Avatar size='2xl' opacity={0.5} tint='rgba(255, 255, 255, 0.3)' />
 	</div>
 
-	<div class="relative z-10 mr-8 grid grid-cols-2 content-baseline gap-2">
-		<div></div>
-		<div class="mx-auto max-w-3xl text-center">
-			<h1 class="font-montserrat mb-6 text-4xl font-bold leading-tight text-white md:text-6xl">
+	<div
+		class='relative z-10 mr-2 grid grid-cols-1 content-baseline justify-items-center gap-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2'
+	>
+		<div id="left-side" class="py-10"></div>
+		<div class='pl-10 md:pl-0 lg:pl-0 mx-auto max-w-3xl text-left sm:text-center md:text-center lg:text-center'>
+			<h1 class='font-montserrat mb-6 text-5xl font-bold leading-tight text-white md:text-6xl'>
 				Tervetuloa sivuilleni!
 			</h1>
-			<p class="font-montserrat mb-8 text-xl font-light text-purple-100 md:text-2xl">
+			<p class='font-montserrat mb-8 text-xl font-light text-purple-100 md:text-2xl'>
 				Tämä on blogini, jossa kirjoitan teknologiasta, sukututkimuksesta. Tai mitä mieleen tulee.
 			</p>
 			<a
-				href="/blog"
-				class="z-100 inline-block transform rounded-lg bg-white px-8 py-4 font-semibold text-purple-900 shadow-lg transition-colors duration-300 hover:-translate-y-1 hover:bg-purple-100 hover:shadow-xl"
+				href='/blog'
+				class='mt-8 z-100 inline-block transform rounded-lg bg-white px-8 py-4 font-semibold text-purple-900 shadow-lg transition-colors duration-300 hover:-translate-y-1 hover:bg-purple-100 hover:shadow-xl'
 			>
 				Kaikki postaukset
 			</a>

@@ -8,12 +8,8 @@ export interface Props {
 	author?: string
 	tags?: string[]
 	lang?: string
-	image?: {
-		src: string
-		alt: string
-	}
 }
-const { title, description, pubDate, slug, lang } = Astro.props as Props
+const { title, description, pubDate, slug, lang, tags } = Astro.props as Props
 
 // Format date for display
 function formatDate(dateStr: string): string {
@@ -21,7 +17,7 @@ function formatDate(dateStr: string): string {
 		const date = new Date(dateStr)
 		const options: Intl.DateTimeFormatOptions = {
 			year: 'numeric',
-			month: 'long',
+			month: 'short',
 			day: 'numeric'
 		}
 		return date.toLocaleDateString(lang === 'fi' ? 'fi-FI' : 'en-US', options)
@@ -35,27 +31,27 @@ const formattedDate = formatDate(pubDate.toString())
 ---
 
 <article
-	class="overflow-hidden rounded-xl bg-purple-600 shadow-lg transition-shadow duration-300 hover:shadow-xl"
+	class='w-80 overflow-hidden rounded-xl bg-purple-600 shadow-lg transition-shadow duration-300 hover:shadow-xl sm:mx-auto lg:mx-auto lg:w-full'
 >
-	<div class="p-6">
-		<time datetime={pubDate.toString()} class="mb-2 block text-sm text-purple-300">
+	<div class='p-6'>
+		<time datetime={pubDate.toString()} class='mb-2 block text-sm text-purple-300'>
 			{formattedDate}
 		</time>
 
-		<h2 class="mb-3 text-2xl font-bold text-purple-100 transition-colors hover:text-purple-400">
+		<h2 class='mb-3 text-2xl font-bold text-purple-100 transition-colors hover:text-purple-400'>
 			<a href={`/blog/${slug}`}>
 				{title}
 			</a>
 		</h2>
-			<p class="mb-4 line-clamp-3 text-purple-200">
-				{description}
-			</p>
+		<p class='mb-4 line-clamp-3 text-purple-200'>
+			{description}
+		</p>
 
-			<div class='flex flex-wrap gap-2'>
+		<div class='text-center space-x-2'>
 			{
-				(Astro.props.tags ?? []).map((tag) => (
-					<span class='rounded-full bg-purple-200 px-3 py-1 text-sm text-purple-800 transition-colors hover:bg-purple-200'>
-						#{tag}
+				(tags ?? []).map((tag) => (
+					<span class='rounded-full bg-purple-200 px-3 py-1 text-xs text-purple-800 transition-colors hover:bg-purple-200'>
+						{tag}
 					</span>
 				))
 			}

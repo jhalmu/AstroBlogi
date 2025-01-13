@@ -12,11 +12,11 @@ const { src = '/avatar.jpg', alt = "Blog author's profile picture" } = Astro.pro
 		<img
 			src={src}
 			alt={alt}
-			class="profile-image h-28 w-28 rounded-full object-cover transition-all duration-300"
+			class="profile-image h-14 w-14 rounded-full object-cover transition-all duration-300"
 			loading="eager"
 			decoding="async"
-			width="112"
-			height="112"
+			width="60"
+			height="60"
 		/>
 		<div class="color-overlay"></div>
 	</div>
@@ -26,12 +26,12 @@ const { src = '/avatar.jpg', alt = "Blog author's profile picture" } = Astro.pro
 	.profile-image-wrapper {
 		position: relative;
 		display: inline-block;
-		opacity: 0.6;
+		opacity: 0.5;
 	}
 
 	.image-tint {
 		position: relative;
-		border-radius: 50%;
+		border-radius: 70%;
 		background-color: rgba(147, 51, 234, 0.2);
 		&::before {
 			content: '';
@@ -46,12 +46,12 @@ const { src = '/avatar.jpg', alt = "Blog author's profile picture" } = Astro.pro
 	.profile-image {
 		position: relative;
 		z-index: 2;
-		border: 2px solid rgba(147, 51, 234, 0.2);
+		border: 2px solid rgba(126, 10, 234, 0.2);
 		box-shadow:
 			0 4px 6px -1px rgba(0, 0, 0, 0.1),
 			0 2px 4px -1px rgba(0, 0, 0, 0.06),
 			0 0 0 2px rgba(147, 51, 234, 0.1);
-		filter: brightness(1.2) contrast(0.9) saturate(1.1);
+		filter: brightness(1.1) contrast(0.9) saturate(1.4);
 		transform: translateZ(0);
 		mix-blend-mode: normal;
 	}
@@ -59,7 +59,7 @@ const { src = '/avatar.jpg', alt = "Blog author's profile picture" } = Astro.pro
 	.color-overlay {
 		position: absolute;
 		inset: 0;
-		border-radius: 50%;
+		border-radius: 60%;
 		background: rgba(147, 51, 234, 0.1);
 		mix-blend-mode: color;
 		pointer-events: none;

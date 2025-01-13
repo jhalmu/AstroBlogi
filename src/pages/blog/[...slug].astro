@@ -6,12 +6,16 @@ import HeroImage from '../../components/HeroImage.astro'
 import Layout from '../../layouts/Layout.astro'
 import { render } from 'astro:content'
 import '../../styles/blog.css'
+import { getContentPreview } from '../../utils/utils.js'
 
 // Tell Astro to prerender this page as static HTML
 export const prerender = true
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog')
+	if (posts.length === 0) {
+		return []
+	}
 	return posts.map((post) => ({
 		params: { slug: post.id },
 		props: post
@@ -24,32 +28,14 @@ type Props = CollectionEntry<'blog'> & {
 	}
 	author?: string
 	tags?: string[]
+	lang?: string
 }
 
 const post = Astro.props
 const { Content } = await render(post)
 
-// Function to get preview text from content
-function getContentPreview(content: string): string {
-	// Remove HTML tags and markdown syntax
-	const cleanText = content
-		.replace(/<[^>]*>/g, '') // Remove HTML tags
-		.replace(/[#*`_~\[\]]/g, '') // Remove markdown syntax
-		.replace(/\n+/g, ' ') // Replace newlines with spaces
-		.trim()
-
-	// Get first 160 characters, try to end at a complete sentence or word
-	const maxLength = 160
-	if (cleanText.length <= maxLength) return cleanText
-
-	const truncated = cleanText.slice(0, maxLength)
-	const lastPeriod = truncated.lastIndexOf('.')
-	const lastSpace = truncated.lastIndexOf(' ')
-
-	// Try to end at a sentence, otherwise end at a word
-	const endIndex = lastPeriod > maxLength * 0.5 ? lastPeriod + 1 : lastSpace
-	return truncated.slice(0, endIndex) + '...'
-}
+// Log the content to check if post.body is populated
+//console.log('Post body:', post.body)
 
 // Get the description text
 const description = post.data.description || (post.body ? getContentPreview(post.body) : '')
@@ -58,37 +44,37 @@ const description = post.data.description || (post.body ? getContentPreview(post
 <Layout
 	title={post.data.title}
 	description={description}
-	type="article"
+	type='article'
 	publishDate={post.data.pubDate?.toISOString()}
 	author={post.data.author || Astro.props.author}
 	tags={post.data.tags || Astro.props.tags}
+	lang={post.data.lang || Astro.props.lang}
 >
 	<main>
-		<HeroImage
-			title={post.data.title}
-			description={description}
-			overlayOpacity={50}
-			lastUpdated={post.data.pubDate?.toISOString()}
-			priority={true}
-			author={post.data.author || Astro.props.author}
-			tags={post.data.tags}
-		/>
-
-		<div class="container mx-auto max-w-3xl px-4 py-8 pb-24">
-			<article class="blog-content">
-				<Prose>
-					<Content />
-				</Prose>
-			</article>
-		</div>
+		{
+					<HeroImage
+						title={post.data.title}
+						description={description}
+						lastUpdated={post.data.pubDate?.toISOString()}
+						priority={true}
+						author={post.data.author || Astro.props.author}
+						tags={post.data.tags}
+						lang={post.data.lang || Astro.props.lang}
+					/>
+					<article class='blog-content m-22'>
+					<Prose>
+						<Content />
+					</Prose>
+					</article>
+				
 	</main>
 </Layout>
 
 <style>
 	.blog-content {
-		line-height: 1.8;
+		line-height: 1;
 		border-radius: 20px;
-		padding: 1.5em;
+		padding: 1em;
 	}
 
 	.blog-content :global(h1) {
@@ -107,7 +93,6 @@ const description = post.data.description || (post.body ? getContentPreview(post
 	.blog-content :global(h3) {
 		font-weight: 200;
 		margin-top: 1em;
-
 		text-decoration: none;
 	}
 	.blog-content :global(h4),
@@ -121,14 +106,17 @@ const description = post.data.description || (post.body ? getContentPreview(post
 
 	.blog-content :global(h1) {
 		font-size: 2.25em;
+		text-decoration: none;
 	}
 
 	.blog-content :global(h2) {
 		font-size: 1.875em;
+		text-decoration: none;
 	}
 
 	.blog-content :global(h3) {
 		font-size: 1.5em;
+		text-decoration: none;
 	}
 
 	.blog-content :global(p) {
@@ -143,6 +131,11 @@ const description = post.data.description || (post.body ? getContentPreview(post
 
 	.blog-content :global(li) {
 		margin-bottom: 0.5em;
+		list-style: '\2192' outside;
+	}
+
+	.blog-content :global(li::marker) {
+		color: #e2e8f0;
 	}
 
 	.blog-content :global(pre) {
@@ -172,11 +165,11 @@ const description = post.data.description || (post.body ? getContentPreview(post
 	}
 
 	.blog-content :global(a) {
-		color: #4a5568;
+		color: #dee1e7;
 		text-decoration: underline;
 	}
 
 	.blog-content :global(a:hover) {
-		color: #2d3748;
+		color: #d8dbe0;
 	}
 </style>
