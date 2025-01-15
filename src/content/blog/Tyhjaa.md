@@ -1,6 +1,6 @@
 ---
-title: 'Ei vielä sisältöä'
-pubDate: '2025-01-14'
+title: 'Ei vielä sisältöä 17'
+pubDate: '2025-01-17'
 author: 'Juha Halmu'
 tags: ['test', 'kontentti', 'blogi']
 lang: 'fi'

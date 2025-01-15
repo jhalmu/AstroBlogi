@@ -1,6 +1,6 @@
 ---
-title: Editorilla tehty teksti 15
-pubDate: 2025-01-15
+title: Editorilla tehty teksti 16-2
+pubDate: 2025-01-16
 author: Juha Halmu
 description: Testataan mites tekstin teko onnistuu
 tags: [Editori, js, Ai, aiaiai]
