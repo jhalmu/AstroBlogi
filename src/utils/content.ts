@@ -1,8 +1,6 @@
 import type { CollectionEntry } from 'astro:content'
 import type { Page } from '../types/content'
 
-const DEBUG = false // Set to true to enable debug logging
-
 export function sortBlogPosts(posts: CollectionEntry<'blog'>[]): CollectionEntry<'blog'>[] {
 	return posts.sort((a, b) => {
 		// Primary: Compare frontmatter dates
