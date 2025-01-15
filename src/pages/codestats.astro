@@ -1,0 +1,149 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { initializeChart } from '../components/Pie.ts'
+import { initializeBarChart } from '../components/Bar.ts'
+import { initializePolarChart } from '../components/Polar.ts'
+
+const [pieChartConfig, barChartConfig, polarChartConfig] = await Promise.all([
+	initializeChart(),
+	initializeBarChart(),
+	initializePolarChart()
+])
+
+declare global {
+	interface Window {
+		pieChartConfig: any
+		barChartConfig: any
+		polarChartConfig: any
+	}
+}
+---
+
+<Layout
+	title='Code Stats | Juha Halmu'
+	author='Juha Halmu'
+	description='Programming stats from Code::Stats'
+	type='article'
+>
+	<main class='container bg-lavender-500/40 rounded-2xl '>
+		<h1>Code Statistics</h1>
+		<div class='charts-stack'>
+			<section class='chart-section bg-white/20'>
+				<div class='chart-container bar'>
+					<canvas id='barChart'></canvas>
+				</div>
+			</section>
+			<section class='chart-section bg-white/20'>
+				<div class='chart-container polar'>
+					<canvas id='polarChart'></canvas>
+				</div>
+			</section>
+			<section class='chart-section bg-white/20'>
+				<div class='chart-container pie'>
+					<canvas id='pieChart'></canvas>
+				</div>
+			</section>
+		</div>
+	</main>
+	<footer class='stats-footer'>
+		<p>
+			Data provided by <a href='https://codestats.net/' target='_blank' rel='noopener noreferrer'
+				>Code::Stats</a
+			>
+		</p>
+		<p>
+			Full profile stats <a
+				href='https://codestats.net/users/jhalmu'
+				target='_blank'
+				rel='noopener noreferrer'>Code::Stats - jhalmu</a
+			>
+		</p>
+	</footer>
+
+	<style>
+		.container {
+			padding: 2rem;
+			margin: 0 auto;
+			max-width: 1400px;
+			color: #ffffff;
+		}
+		.container h1 {
+			text-align: center;
+			margin-bottom: 2rem;
+			color: #ffffff;
+			font-size: 2.5rem;
+		}
+		.charts-stack {
+			display: flex;
+			flex-direction: column;
+			gap: 3rem;
+			margin: 2rem auto;
+		}
+		.chart-section {
+			border-radius: 12px;
+			padding: 1.5rem;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		}
+		.chart-container {
+			width: 100%;
+			position: relative;
+			margin: 0 auto;
+		}
+		.chart-container.pie {
+			height: 500px;
+			max-width: 800px;
+		}
+		.chart-container.bar {
+			height: 400px;
+			max-width: 1200px;
+		}
+		.chart-container.polar {
+			height: 500px;
+			max-width: 800px;
+		}
+		@media (max-width: 768px) {
+			.chart-container.pie,
+			.chart-container.bar,
+			.chart-container.polar {
+				height: 350px;
+			}
+			h1 {
+				font-size: 2rem;
+			}
+		}
+
+		.stats-footer {
+			text-align: center;
+			padding: 2rem 0;
+			color: #ffffff;
+		}
+
+		.stats-footer a {
+			color: #3182ce;
+			text-decoration: none;
+			font-weight: 500;
+			transition: color 0.2s ease;
+		}
+
+		.stats-footer a:hover {
+			color: #ffffff;
+			text-decoration: underline;
+		}
+	</style>
+
+	<script>
+		import { initializeClientChart } from '../components/ChartInitializer'
+
+		document.addEventListener('DOMContentLoaded', () => {
+			initializeClientChart(window.pieChartConfig, 'pieChart')
+			initializeClientChart(window.barChartConfig, 'barChart')
+			initializeClientChart(window.polarChartConfig, 'polarChart')
+		})
+	</script>
+
+	<script is:inline define:vars={{ pieChartConfig, barChartConfig, polarChartConfig }}>
+		window.pieChartConfig = pieChartConfig
+		window.barChartConfig = barChartConfig
+		window.polarChartConfig = polarChartConfig
+	</script>
+</Layout>

@@ -6,7 +6,8 @@ const navItems = [
 	{ href: '/', text: 'Alku' },
 	{ href: '/blog', text: 'Blogi' },
 	{ href: '/projects', text: 'Projektit' },
-	{ href: '/about', text: 'Tietoja' }
+	{ href: '/about', text: 'Tietoja' },
+	{ href: '/codestats', text: 'CodeStats' }
 ]
 
 const currentPath = Astro.url.pathname
@@ -36,11 +37,11 @@ const currentPath = Astro.url.pathname
 		<div id='nav_wrapper' class='grid grid-cols-1'>
 			<div id='brand' class='items-center justify-between px-4'>
 				<div class='flex items-baseline space-x-4'>
-					<a href="/" class='flex items-center '>
+					<a href='/' class='flex items-center'>
 						<ProfileImage alt="Blog author's profile picture" />
 					</a>
 					<h1
-						class="text-shadow whitespace-nowrap font-['Abril_Fatface'] text-6xl tracking-normal text-purple-100 opacity-80 transition-opacity duration-300 hover:opacity-90 "
+						class="text-shadow whitespace-nowrap font-['Abril_Fatface'] text-6xl tracking-normal text-purple-100 opacity-80 transition-opacity duration-300 hover:opacity-90"
 						id='site-title'
 					>
 						<span class='tracking-normal'>Juha</span>{' '}
@@ -60,8 +61,9 @@ const currentPath = Astro.url.pathname
 							currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href))
 						return (
 							<a
+								data-astro-prefetch='hover'
 								href={item.href}
-								class={`text-purple-50 opacity-80 transition-opacity duration-300 hover:opacity-100 md:text-lg  ${
+								class={`text-purple-50 opacity-80 transition-opacity duration-300 hover:opacity-100 md:text-lg ${
 									isActive ? 'font-bold underline' : ''
 								}`}
 								role='menuitem'

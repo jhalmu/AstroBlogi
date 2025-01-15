@@ -1,0 +1,9 @@
+ {
+  "compilerOptions": {
+    "module": "ES6"
+  },
+ "type": "setting", 
+  "settings": {
+    "javascript.implicitProjectConfig.module": "ES6"
+  }
+}

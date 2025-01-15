@@ -14,7 +14,8 @@ export default defineConfig({
 		}
 	},
 	prefetch: {
-		prefetchAll: true
+		prefetchAll: true,
+		defaultStrategy: 'viewport',
 	},
 	integrations: [
 		tailwind({

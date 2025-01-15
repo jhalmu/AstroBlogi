@@ -46,6 +46,11 @@ const structuredData = {
 		dateModified: publishDate
 	})
 }
+export interface Props {
+	title: string
+
+	chartConfig?: any
+}
 ---
 
 <!doctype html>
@@ -124,7 +129,7 @@ const structuredData = {
 		</header>
 
 		<main id='main-content' class='z-10' transition:animate='slide'>
-			<div class='blog-content mx-auto mt-8 max-w-3xl	pb-10 px-16'>
+			<div class='blog-content mx-auto mt-8 max-w-3xl px-16 pb-10'>
 				<slot />
 			</div>
 		</main>
