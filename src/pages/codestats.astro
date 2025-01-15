@@ -134,16 +134,39 @@ declare global {
 	<script>
 		import { initializeClientChart } from '../components/ChartInitializer'
 
-		document.addEventListener('DOMContentLoaded', () => {
-			initializeClientChart(window.pieChartConfig, 'pieChart')
-			initializeClientChart(window.barChartConfig, 'barChart')
-			initializeClientChart(window.polarChartConfig, 'polarChart')
-		})
+		async function initializeCharts() {
+			console.log('Initializing charts...');
+			setTimeout(() => {
+				try {
+					initializeClientChart(window.pieChartConfig, 'pieChart')
+					initializeClientChart(window.barChartConfig, 'barChart')
+					initializeClientChart(window.polarChartConfig, 'polarChart')
+				} catch (error) {
+					console.error('Error initializing charts:', error);
+				}
+			}, 100); // Small delay to ensure DOM is ready
+		}
+
+		// Initialize on load
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', initializeCharts);
+		} else {
+			initializeCharts();
+		}
+
+		// Re-initialize on visibility change
+		document.addEventListener('visibilitychange', () => {
+			if (document.visibilityState === 'visible') {
+				initializeCharts();
+			}
+		});
 	</script>
 
 	<script is:inline define:vars={{ pieChartConfig, barChartConfig, polarChartConfig }}>
-		window.pieChartConfig = pieChartConfig
-		window.barChartConfig = barChartConfig
-		window.polarChartConfig = polarChartConfig
+		// Make configs available globally
+		window.pieChartConfig = pieChartConfig;
+		window.barChartConfig = barChartConfig;
+		window.polarChartConfig = polarChartConfig;
+		console.log('Chart configs loaded:', { pieChartConfig, barChartConfig, polarChartConfig });
 	</script>
 </Layout>

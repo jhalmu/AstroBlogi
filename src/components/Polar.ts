@@ -1,4 +1,3 @@
-import { ChartColors } from './shared/colors';
 import type { ChartConfiguration } from 'chart.js';
 
 const Utils = {
@@ -46,7 +45,7 @@ export const polarConfig: ChartConfiguration = {
         labels: [],
         datasets: [{
             data: [],
-            backgroundColor: Object.values(ChartColors.COLORS),
+            backgroundColor: Object.values(Utils.CHART_COLORS),  // Using local Utils instead of ChartColors
             borderWidth: 1,
             borderColor: '#4c1d95'  // purple-900
         }]
