@@ -13,3 +13,7 @@
 
 Fixed lot of things. UI is better withd smaller devices. Hope. 
 Removed pseudo posts. Well I don't have very much new content, but who cares. There is my face.
+
+## 15.1
+
+- Added Charts, data from coding stats.
