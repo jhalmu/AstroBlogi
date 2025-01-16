@@ -34,16 +34,16 @@ const formattedDate = formatDate(pubDate.toString())
 	class='w-80 overflow-hidden rounded-xl bg-purple-600 shadow-lg transition-shadow duration-300 hover:shadow-xl sm:mx-auto lg:mx-auto lg:w-full'
 >
 	<div class='p-6'>
-		<time datetime={pubDate.toString()} class='mb-2 block text-sm text-purple-300'>
+		<time datetime={pubDate.toString()} class='mb-2 block text-sm text-purple-100'>
 			{formattedDate}
 		</time>
 
-		<h2 class='mb-3 text-2xl font-bold text-purple-100 transition-colors hover:text-purple-400'>
+		<h2 class='mb-3 text-2xl font-bold text-purple-100 transition-colors hover:text-purple-100'>
 			<a href={`/blog/${slug}`}>
 				{title}
 			</a>
 		</h2>
-		<p class='mb-4 line-clamp-3 text-purple-200'>
+		<p class='mb-4 line-clamp-3 text-purple-100'>
 			{description}
 		</p>
 

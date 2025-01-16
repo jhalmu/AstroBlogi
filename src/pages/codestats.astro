@@ -17,7 +17,7 @@ declare global {
 		polarChartConfig: any
 	}
 }
-export const prerender = false
+//export const prerender = false
 ---
 
 <Layout
@@ -26,37 +26,99 @@ export const prerender = false
 	description='Programming stats from Code::Stats'
 	type='article'
 >
-	<main class='container rounded-2xl bg-lavender-500/40'>
-		<h1>Code Statistics</h1>
-		<div class='charts-stack'>
-			<section class='chart-section bg-white/20'>
+	<main
+		class='container rounded-2xl bg-lavender-500/40'
+		role='main'
+			aria-labelledby="page-title"
+	>
+		<!-- Loading and error messages container -->
+		<div class="status-container" aria-live="polite">
+			<div id="loading-status" class="sr-only">Loading charts...</div>
+			<div id="error-message" class="hidden text-red-500 text-center p-4"></div>
+		</div>
+
+		<h1 id="page-title">Code Statistics</h1>
+
+		<div class='charts-stack' id="stats-content">
+			<section 
+				class='chart-section bg-white/20' 
+				role="region" 
+				aria-labelledby="bar-chart-title"
+			>
+				<h2 id="bar-chart-title" class="sr-only">Programming Languages Usage Bar Chart</h2>
 				<div class='chart-container bar'>
-					<canvas id='barChart'></canvas>
+					<canvas 
+						id='barChart' 
+						role="img"
+						aria-label='Bar chart showing programming language usage statistics'
+						tabindex="0"
+					></canvas>
+					<div id="bar-chart-description" class="sr-only">
+						This chart shows the usage statistics of different programming languages over time.
+					</div>
 				</div>
 			</section>
-			<section class='chart-section bg-white/20'>
+
+			<section 
+				class='chart-section bg-white/20'
+				role="region" 
+				aria-labelledby="polar-chart-title"
+			>
+				<h2 id="polar-chart-title" class="sr-only">Programming Languages Distribution Polar Chart</h2>
 				<div class='chart-container polar'>
-					<canvas id='polarChart'></canvas>
+					<canvas 
+						id='polarChart' 
+						role="img"
+						aria-label='Polar chart showing distribution of programming languages'
+						tabindex="0"
+					></canvas>
+					<div id="polar-chart-description" class="sr-only">
+						This chart displays the relative distribution of programming languages in a polar layout.
+					</div>
 				</div>
 			</section>
-			<section class='chart-section bg-white/20'>
+
+			<section 
+				class='chart-section bg-white/20'
+				role="region" 
+				aria-labelledby="pie-chart-title"
+			>
+				<h2 id="pie-chart-title" class="sr-only">Programming Languages Breakdown Pie Chart</h2>
 				<div class='chart-container pie'>
-					<canvas id='pieChart'></canvas>
+					<canvas 
+						id='pieChart' 
+						role="img"
+						aria-label='Pie chart showing breakdown of programming languages'
+						tabindex="0"
+					></canvas>
+					<div id="pie-chart-description" class="sr-only">
+						This chart shows the percentage breakdown of time spent in different programming languages.
+					</div>
 				</div>
 			</section>
 		</div>
 	</main>
-	<footer class='stats-footer'>
+
+	<footer
+		id='stats-footer'
+		class='stats-footer mt-12'
+		role='contentinfo'
+		aria-label='Additional Statistics Information'
+	>
 		<p>
-			Data provided by <a href='https://codestats.net/' target='_blank' rel='noopener noreferrer'
-				>Code::Stats</a
+			Data provided by <a
+				href='https://codestats.net/'
+				target='_blank'
+				rel='noopener noreferrer'
+				aria-label='Code::Stats'>Code::Stats</a
 			>
 		</p>
 		<p>
 			Full profile stats <a
 				href='https://codestats.net/users/jhalmu'
 				target='_blank'
-				rel='noopener noreferrer'>Code::Stats - jhalmu</a
+				rel='noopener noreferrer'
+				aria-label='Code::Stats - jhalmu'>Code::Stats - jhalmu</a
 			>
 		</p>
 	</footer>
@@ -120,7 +182,7 @@ export const prerender = false
 		}
 
 		.stats-footer a {
-			color: #3182ce;
+			color: #8cbde8;
 			text-decoration: none;
 			font-weight: 500;
 			transition: color 0.2s ease;
@@ -130,36 +192,89 @@ export const prerender = false
 			color: #ffffff;
 			text-decoration: underline;
 		}
+
+		.skip-link:focus {
+			clip-path: none;
+			width: auto;
+			height: auto;
+			border: 2px solid #4a5568;
+		}
+		
+		.hidden {
+			display: none;
+		}
+		.status-container {
+			position: fixed;
+			top: 1rem;
+			right: 1rem;
+			z-index: 50;
+		}
 	</style>
 
 	<script>
 		import { initializeClientChart } from '../components/ChartInitializer'
 
-		async function initializeCharts() {
-			console.log('Initializing charts...')
-			setTimeout(() => {
-				try {
-					initializeClientChart(window.pieChartConfig, 'pieChart')
-					initializeClientChart(window.barChartConfig, 'barChart')
-					initializeClientChart(window.polarChartConfig, 'polarChart')
-				} catch (error) {
-					console.error('Error initializing charts:', error)
-				}
-			}, 100) // Small delay to ensure DOM is ready
+		function handleKeyboardNavigation(event: KeyboardEvent) {
+			const charts = document.querySelectorAll('canvas')
+			if (event.key === 'Tab') {
+				charts.forEach(chart => {
+					chart.setAttribute('tabindex', '0')
+				})
+			}
 		}
 
-		// Initialize on load
+		async function initializeCharts() {
+			const loadingStatus = document.getElementById('loading-status')
+			const errorMessage = document.getElementById('error-message')
+			
+			try {
+				loadingStatus?.classList.remove('sr-only')
+				errorMessage?.classList.add('hidden')
+
+				await Promise.all([
+					initializeClientChart(window.pieChartConfig, 'pieChart'),
+					initializeClientChart(window.barChartConfig, 'barChart'),
+					initializeClientChart(window.polarChartConfig, 'polarChart')
+				])
+
+				loadingStatus?.classList.add('sr-only')
+				
+				// Announce completion to screen readers
+				const announcement = document.createElement('div')
+				announcement.setAttribute('role', 'status')
+				announcement.setAttribute('aria-live', 'polite')
+				announcement.textContent = 'Charts have been loaded successfully'
+				document.body.appendChild(announcement)
+				setTimeout(() => announcement.remove(), 1000)
+
+			} catch (error) {
+				console.error('Error initializing charts:', error)
+				if (errorMessage) {
+					errorMessage.textContent = 'Error loading charts. Please try again later.'
+					errorMessage.classList.remove('hidden')
+				}
+				loadingStatus?.classList.add('sr-only')
+			}
+		}
+
+		// Event Listeners
+		document.addEventListener('keydown', handleKeyboardNavigation)
+		
 		if (document.readyState === 'loading') {
 			document.addEventListener('DOMContentLoaded', initializeCharts)
 		} else {
 			initializeCharts()
 		}
 
-		// Re-initialize on visibility change
 		document.addEventListener('visibilitychange', () => {
 			if (document.visibilityState === 'visible') {
 				initializeCharts()
 			}
+		})
+
+		// Cleanup
+		window.addEventListener('unload', () => {
+			document.removeEventListener('keydown', handleKeyboardNavigation)
 		})
 	</script>
 
