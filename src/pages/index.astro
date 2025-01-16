@@ -3,21 +3,20 @@ import Layout from '../layouts/Layout.astro'
 import Hero from '../components/Hero.astro'
 import BlogCard from '../components/BlogCard.astro'
 import { getCollection } from 'astro:content'
-import type { CollectionEntry } from 'astro:content'
+import { sortBlogPosts } from '../utils/content'
 import { getContentPreview } from '../utils/utils.js'
 
-const posts = (await getCollection('blog'))
-	.sort(
-		(a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) =>
-			new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
-	)
-	.slice(0, 2)
+// Get and validate blog posts
+const allPosts = await getCollection('blog')
+const validPosts = allPosts.filter((post) => !post.data.draft)
+const sortedPosts = sortBlogPosts(validPosts)
+const posts = sortedPosts.slice(0, 2)
 
 const title = "Juha Halmu's Blog"
 const description = 'Technology, Photography, and Local History'
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} type='website'>
 	<main class='text-center'>
 		<Hero />
 

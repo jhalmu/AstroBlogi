@@ -4,9 +4,18 @@ import tailwind from '@astrojs/tailwind'
 import svelte from '@astrojs/svelte'
 import node from '@astrojs/node'
 import sitemap from '@astrojs/sitemap'
+import remarkToc from 'remark-toc'
 
-// https://astro.build/config
+const tocOptions = {
+  tight: true,
+  heading: 'Sisällysluettelo'
+};
+
 export default defineConfig({
+	output: 'static',
+	markdown: {
+    remarkPlugins: [[remarkToc, tocOptions]]
+  },
 	site: 'https://juhahalmu.net',
 	env: {
 		schema: {
