@@ -16,7 +16,7 @@ const title = "Juha Halmu's Blog"
 const description = 'Web-kehitystä, sukututkimusta ja muuta mielenkiintoista'
 ---
 
-<Layout title={title} description={description} type='website'>
+<Layout title={title} description={description} type='article'>
 	<main class='text-center'>
 		<Hero />
 
@@ -48,6 +48,7 @@ const description = 'Web-kehitystä, sukututkimusta ja muuta mielenkiintoista'
 	@media only screen and (min-width: 390px) and (max-width: 767px) and (-webkit-device-pixel-ratio: 2) {
 		article {
 			padding: 0 0.5rem;
+			margin: 0 auto;
 		}
 	}
 </style>

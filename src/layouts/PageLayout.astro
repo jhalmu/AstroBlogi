@@ -4,6 +4,7 @@ import HeroImage from '../components/HeroImage.astro'
 import Footer from '../components/Footer.astro'
 import Navigation from '../components/Navigation.astro'
 import '../styles/global.css'
+import '../styles/pages.css'
 
 export interface Props {
 	title: string
@@ -123,7 +124,7 @@ const structuredData = {
 		</header>
 
 		<main id='main-content' class='z-10'>
-			<div class='mx-auto mt-8 max-w-2xl px-16 pb-10'>
+			<div class='mx-auto mt-8 max-w-4xl px-16 pb-10'>
 				<article class='blog-content'>
 					<HeroImage
 						title={title}

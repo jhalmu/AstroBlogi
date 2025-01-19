@@ -14,6 +14,13 @@ const tocOptions = {
 export default defineConfig({
 	output: 'static',
 	markdown: {
+		shikiConfig: {
+			// Choose from Shiki's built-in themes (or add your own)
+			// https://shiki.style/themes
+			theme: 'github-dark-dimmed',
+
+			wrap: true,
+		},
     remarkPlugins: [[remarkToc, tocOptions]]
   },
 	site: 'https://juhahalmu.net',

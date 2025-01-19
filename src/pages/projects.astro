@@ -102,10 +102,14 @@ try {
 ---
 
 <Layout title='Projects | Juha Halmu'>
-	<div class='min-w-xl container mx-auto '>
+	<div class='min-w-xl mx-auto flex flex-col items-center justify-center'>
 		<HeroImage title='Uusimmat projektit' description='My GitHub Projects' priority={true} />
 
-		<div class='mt-12 grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-2'>
+		<div
+			class='mt-12 grid auto-cols-min grid-cols-1 gap-8 gap-x-20 md:grid-cols-2'
+			role='feed'
+			aria-label='GitHub Projects'
+		>
 			{
 				repositories.map((repo) => (
 					<ProjectCard

@@ -2,8 +2,9 @@
 import Footer from '../components/Footer.astro'
 import Navigation from '../components/Navigation.astro'
 import '../styles/global.css'
+import '../styles/pages.css'
+import Prose from '../components/Prose.astro'
 import { ClientRouter } from 'astro:transitions'
-
 export interface Props {
 	title: string
 	description?: string
@@ -55,7 +56,7 @@ export interface Props {
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} data-theme='dark'>
 	<head>
 		<meta charset='UTF-8' />
 		<meta name='viewport' content='width=device-width, initial-scale=1.0' />
@@ -129,15 +130,19 @@ export interface Props {
 			<Navigation />
 		</header>
 
-		<main id='main-content' class='z-10' transition:animate='slide'>
-			<div class='blog-content mx-auto mt-8 max-w-3xl px-16 pb-10'>
-				<slot />
+		<main id='main-content' class='z-10' role='main'>
+			<div class='mx-auto mt-8 max-w-3xl px-16 pb-10 space-x-8'>
+				<article class='blog-content'>
+					<Prose>
+						<slot />
+					</Prose>
+				</article>
 			</div>
-		</main>
 
-		<footer class='relative z-10'>
-			<Footer />
-		</footer>
+			<footer class='relative z-10'>
+				<Footer />
+			</footer>
+		</main>
 	</body>
 </html>
 

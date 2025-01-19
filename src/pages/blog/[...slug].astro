@@ -68,32 +68,17 @@ const description = post.data.description || (post.body ? getContentPreview(post
 				
 	</main>
 </Layout>
-
 <style>
 	.blog-content {
-		line-height: 1;
+		line-height: 1.6;
 		border-radius: 20px;
-		padding: 1em;
+		padding: 1.25em;
+		color: #dee1e7 !important;
 	}
 
-	.blog-content :global(h1) {
-		font-weight: 600;
-		margin-top: 1.5em;
-		margin-bottom: 0.5em;
-		text-decoration: none;
-	}
-
-	.blog-content :global(h2) {
-		font-weight: 400;
-		margin-top: 1em;
-		margin-bottom: 0.5em;
-		text-decoration: none;
-	}
-	.blog-content :global(h3) {
-		font-weight: 200;
-		margin-top: 1em;
-		text-decoration: none;
-	}
+	.blog-content :global(h1),
+	.blog-content :global(h2),
+	.blog-content :global(h3),
 	.blog-content :global(h4),
 	.blog-content :global(h5),
 	.blog-content :global(h6) {
@@ -101,40 +86,37 @@ const description = post.data.description || (post.body ? getContentPreview(post
 		margin-top: 2em;
 		margin-bottom: 1em;
 		text-decoration: none;
+		color: #dee1e7 !important;
 	}
 
 	.blog-content :global(h1) {
 		font-size: 2.25em;
-		text-decoration: none;
 	}
 
 	.blog-content :global(h2) {
 		font-size: 1.875em;
-		text-decoration: none;
 	}
 
 	.blog-content :global(h3) {
 		font-size: 1.5em;
-		text-decoration: none;
 	}
 
 	.blog-content :global(p) {
-		margin-bottom: 0.25em;
+		margin-bottom: 1.5em;
+		color: #dee1e7;
 	}
 
 	.blog-content :global(ul),
 	.blog-content :global(ol) {
-		margin-left: 1.5em;
-		margin-bottom: 0.5em;
+		margin-left: 2em;
+		margin-bottom: 1.5em;
+		color: #dee1e7 !important;
 	}
 
 	.blog-content :global(li) {
 		margin-bottom: 0.5em;
 		list-style: '\2192' outside;
-	}
-
-	.blog-content :global(li::marker) {
-		color: #e2e8f0;
+		color: #dee1e7 !important;
 	}
 
 	.blog-content :global(pre) {
@@ -147,13 +129,13 @@ const description = post.data.description || (post.body ? getContentPreview(post
 	.blog-content :global(code) {
 		font-family: 'Fira Code', monospace;
 		font-size: 0.9em;
+		color: #dee1e7 !important;
 	}
 
 	.blog-content :global(blockquote) {
 		border-left: 4px solid #e2e8f0;
 		padding-left: 1em;
 		margin: 1.5em 0;
-		color: #4a5568;
 	}
 
 	.blog-content :global(img) {
@@ -164,11 +146,51 @@ const description = post.data.description || (post.body ? getContentPreview(post
 	}
 
 	.blog-content :global(a) {
-		color: #dee1e7;
 		text-decoration: underline;
+		color: #dee1e7;
 	}
 
 	.blog-content :global(a:hover) {
-		color: #d8dbe0;
+		color: #2d3748;
+	}
+
+	.blog-content :global(strong) {
+		font-weight: 600;
+		color: #dee1e7 !important;
+	}
+
+	/* Uudet elementit */
+
+	.blog-content :global(hr) {
+		border: 0;
+		height: 1px;
+		background-color: #e2e8f0;
+		margin: 2em 0;
+	}
+
+	.blog-content :global(table) {
+		width: 100%;
+		border-collapse: collapse;
+		margin: 1.5em 0;
+	}
+
+	.blog-content :global(thead) {
+		background-color: #f8fafc;
+		border-bottom: 2px solid #e2e8f0;
+	}
+
+	.blog-content :global(th) {
+		text-align: left;
+		padding: 0.75em;
+		font-weight: 600;
+	}
+
+	.blog-content :global(td) {
+		padding: 0.75em;
+		border-bottom: 1px solid #e2e8f0;
+	}
+
+	.blog-content :global(tr:hover) {
+		background-color: #f8fafc;
 	}
 </style>
