@@ -1,14 +1,20 @@
-export const apps = [
-    {
-        name: 'astroblogi',
-        script: 'npm',
-        args: 'start',
-        env: {
-            NODE_ENV: 'production'
+// ecosystem.config.js
+module.exports = {
+    apps: [
+        {
+            name: "astro-app",
+            script: "npm",
+            args: "start",
+            env: {
+                NODE_ENV: "production"
+            }
+        },
+        {
+            name: "build-watcher",
+            script: "./build-watcher.js",
+            env: {
+                NODE_ENV: "production"
+            }
         }
-    },
-    {
-        name: 'build-watcher',
-        script: './build-watcher.js'
-    }
-];
+    ]
+}
