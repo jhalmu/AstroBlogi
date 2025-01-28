@@ -3,25 +3,26 @@ const chokidar = require('chokidar');
 const { exec } = require('child_process');
 
 const watcher = chokidar.watch('src/content/blog', {
-    ignored: /(^|[\/\\])\../, // Ohita piilotiedostot
+    ignored: /(^|[\/\\])\../, // Ignore dotfiles
     persistent: true
 });
 
 function runBuild()
 {
-    console.log('Tiedostomuutos havaittu, aloitetaan build...');
+    console.log('New markdown file detected, starting build...');
     exec('npm run build', (error, stdout, stderr) =>
     {
         if (error)
         {
-            console.error(`Build-virhe: ${error}`);
+            console.error(`Build error: ${error}`);
             return;
         }
-        console.log(`Build valmis: ${stdout}`);
+        console.log(`Build completed: ${stdout}`);
     });
 }
 
 watcher
-    .on('add', runBuild)
-    .on('change', runBuild)
-    .on('unlink', runBuild);
+    .on('add', runBuild)    // New file
+    .on('change', runBuild) // File modified
+    .on('unlink', runBuild) // File removed
+javascript
