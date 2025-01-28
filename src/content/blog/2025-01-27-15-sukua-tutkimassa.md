@@ -1,0 +1,27 @@
+---
+title: 'Sukua tutkimassa'
+pubDate: '2025-01-27T15:36:39.712'
+author: 'Juha Halmu'
+description: ''
+tags: [sukututkimus,historia]
+---
+
+Vuonna 2015 Jere Markkanen lähetti minulle sähköpostin jossa hän kyseli mitä tiedän siitä ja tästä sukulaisesta ja kertoi hieman Halmu sukunimen lähtöajoista. Olin siihen että jeess ja tottakai.
+
+Olisiko ollut 2020 kun laitoin hänelle sähköpostia. Isä oli löytänyt Kestilän sotilaista kertovasta teoksesta kuvan joka muistutti kovasti häntä itseään. Tähän asti ongelma oli, että äitinsä ei ollut suostunut kertomaan kuka hänen isänsä oli. Ja kaikilta muilta oli kielletty kertomasta. Tämän kuvan kera kuitenkin vielä elossa olleet tietävät sukulaiset olivat samaa mieltä ja myönsivät että sama henkilö.
+
+Siitä sitten melko samantien ja jonkinlaisen ajanjakson kuluessa oli minusta serkku, äitilinja ja Big-Y 700 -testit. Big-Y 700 on siis se joka hankitaan kun halutaan oikeasti saada luotettava tulos isälinjasta. Samoin isästä hankin serkkutestin ja samalla äitilinjankin. Samalla toki myös äidistä serkkutesti ja tuliko myös äitilinja otettua, en muista, mutta jos en ollut ottanut menen samantien sen tilaamaan. Toki vaimosta, siskontytöstä ja isän siskon tytöstä otettiin serkkutestiä. 
+
+Onneksi oli perintötieto, yksi toinenkin Big-Y testi ja Jere auttamassa, niin asia oli sillä selvä. Sukulinjani oli (ja on) Pussinen, lähtöisin Kainuusta ja sieltä sitten tietenkin Savon valtakunnasta. Tämä osuma oli Ilomantsista. Myöhemmin tuli vielä kolmas testi ja se oli Rovaniemeltä. Katsoos mistä seuraavat.
+
+Kas Kustaa Vaasa, sukulaispoika ja Ruotsin ja Suomen hallitseva henkilö, antoi määräyksen noin 1550 että Kainuu on asutettava a) saadaan veroja b) saadaan ehkä venäläisiä ja karjalaisia pidettyä omalla puolellaan. Tämä oma puoli oli tuohon aikaan aavistuksen liikkuva käsite ja tähän aikaan olikin melko suuret mahdolliset todellisen Suur-Suomen synnylle: Novgorood oli heikentynyt ja kun rajat eivät ihan olleet kiveen hakattuja, tai ainakaan kovin syvälle, niin ne tahtoivat siirtyä venäjän ja karjalan puolelle ja kun tarpeeksi oli päästy sisään, niin siihen sitten lykättiin linna vähän isommaksi rajakiveksi. 
+
+Tokikaan karjalaiset tai venäläiset eivät tästä tykänneet vaan kostoretkiä tehtiin puolin ja toisin. Tästä mielenkiintoisesta ajasta löytyy muun muassa Heikki Kirkkisen Karjala taistelukenttänä, osa II. En muista oliko tämä yksityiskohta tuosta kirjasta, mutta alkuperäinen Pähkinäsaarenrauhan sopimushan hävisi oikeasti jonnekin Tukholman arkistoihin ja lienee siellä tänäkin päivänä ja kun alkuperäistä ei ollut tehtiin paperista kopio koska siihen nyt suurinpiirtein oli merkattu missä raja kulki. 
+
+Niin siitä Suur-Suomesta sen verran että Ruotsin kuninkaalla olisi ollut  siihen aikaan käyttämätön armeija jolla olisi voinut liitää Suomi-Ruotsiin isokin pläntti, mutta tämä päättikin lähteä tuhlaamaan hyvin tilaisuuden keskieurooppaan tai jonnekin ja oliko nyt näin ettei siinä hyvin käynyt. No, ei tullut Suur-Suomea. Oli Ruotsi, sitten Venäjä ja ja oliko taas jotain ja sitten EU vähän myöhemmin. Eikä edes halpaa pensaa. 
+
+No, tämä hieno johdatus johdattuu asiaan, että niin kuin kaikki ovat laittaneet merkille, on Karjalainen -sukunimisiä joka puolella. Ei toki samalla lailla kuin Karjalaiset heimona joilla oli verotusalueena mm. Pohjanmaa. Aikoinaan. Siitä minulla ei ole tietoa, että miten karjalaiset erotettiin venäläisistä vai erotettiinko ollenkaan kun kummatkin tekivät ryöstö- ja kostoretkiä. Luulenpa kuitenkin että karjalaiset enempi keskittyivät kauppaan pl. venäläiset joiden perinteisiin kuului enempi toispuoleinen kaupankäyni, elintilan hankinta ja kylien poltto siinä ohessa. Mutta ymmärtäähän sen että sotia halutaan kun ei ole omaa kulttuuria vaan ollaan Kievin ukrainalaisten jälkeläisiä ja enempi kodittomia ja levottomia klaanilaisia. Eikä klaaneissa pärjää kuin pistämällä lisää sukulaisia johtoon oli sitten kuinka monta tai vähän sormia tahansa. No, hyvinhän toki silläkin on pärjätty kun amerikkakin pyrkii nyt samaan. 
+
+Mutta siis sukunimi Karjalainen. Meinaan tokihan äidinkin kotiseuduilta Kainuuseen lähdettiin ja ainakin yhden Karjalaisen kerran kävelin taaksepäin ja niin siellä luki että syntynyt: Parikkala. Toki ei ole Suomessa outoa että äidillä ja isällä on samaa dna:ta, mutta teoriassa ovat aika eri paikasta kotoisin. Työteliästä, liikkuvaista, lisääntyväistä ja kovasti puhuvaa porukkaa ovat, paitsi kun tulee sukuun klommo. Toki sota, se tällä hetkellä vasta toinen, myrkytti muutaman sukupolven. 
+
+Tuli muuten mieleen, ehkä jopa loppulauseina tälle kirjoitukselle, että kun ihmisten liikkeistä Suomen kartalla puhutaan, niin aina välillä sitten mainitaan että tämä ja tämäkin on saamelaisperäinen sana. Ja täällä ja siellä oli saamelaisten talvi- tai kesäasutus. Oikeasti täytyy perehtyä tarkemmin aiheeseen. Mutta kaipa se on niin, että se joka tuikkasi metsän tuleen ja siihen metsän tuhkaan sitten pellon ja laittoi aidankin ympärille, niin siitä jäi isompi mustetahra virkamiehen paperiin. Ja kiertävät jatkoivat kiertämistä missä tilaa oli. Onhan esim Kainuussakin porotiloja jonkun lehtiartikkelin mukaan ja pärjäävät oikein hyvin ja sen huomaa ainakin siitä että hyvin ruokittuja susia liikkuu enemmän ja enemmän. Siis noilla leveysasteilla. Muuallahan porojen geneettiset ominaisuudetkin pääsevät parempiin oikeuksiin.           
