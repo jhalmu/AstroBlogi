@@ -1,5 +1,5 @@
 // ecosystem.config.js
-module.exports = {
+export default {
     apps: [
         {
             name: "astro-app",
