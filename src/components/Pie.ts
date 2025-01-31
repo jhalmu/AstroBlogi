@@ -1,3 +1,6 @@
+export const prerender = false;
+
+
 import type { ChartConfiguration } from 'chart.js';
 import { Chart } from 'chart.js';
 import type { ChartDataset } from 'chart.js';

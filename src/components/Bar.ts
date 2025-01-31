@@ -1,3 +1,5 @@
+export const prerender = false;
+
 import type { ChartConfiguration, Point, BubbleDataPoint } from 'chart.js';
 import { ChartColors } from './shared/colors';
 

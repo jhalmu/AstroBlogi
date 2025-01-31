@@ -61,7 +61,7 @@ const currentPath = Astro.url.pathname
 							currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href))
 						return (
 							<a
-								data-astro-prefetch='hover'
+								data-astro-prefetch
 								href={item.href}
 								class={`text-purple-50 opacity-80 transition-opacity duration-300 hover:opacity-100 md:text-lg ${
 									isActive ? 'font-bold underline' : ''

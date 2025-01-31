@@ -15,10 +15,7 @@ export default defineConfig({
 	output: 'static',
 	markdown: {
 		shikiConfig: {
-			// Choose from Shiki's built-in themes (or add your own)
-			// https://shiki.style/themes
 			theme: 'github-dark-dimmed',
-
 			wrap: true,
 		},
     remarkPlugins: [[remarkToc, tocOptions]]
@@ -31,7 +28,7 @@ export default defineConfig({
 	},
 	prefetch: {
 		prefetchAll: true,
-		defaultStrategy: 'viewport',
+		defaultStrategy: 'load',
 	},
 	integrations: [
 		tailwind({
