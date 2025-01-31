@@ -4,6 +4,8 @@ import HeroImage from '../components/HeroImage.astro'
 import ProjectCard from '../components/ProjectCard.astro'
 import Layout from '../layouts/Layout.astro'
 
+export const prerender = false
+
 // Define the GraphQL query
 const query = `
 {
@@ -113,7 +115,6 @@ try {
 			{
 				repositories.map((repo) => (
 					<ProjectCard
-						server:defer
 						name={repo.name}
 						updatedAt={repo.updatedAt}
 						title={repo.name}
