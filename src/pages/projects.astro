@@ -1,4 +1,6 @@
 ---
+Astro.response.headers.set('Cache-Control', 'public, max-age=0, must-revalidate')
+
 import { API_TOKEN } from 'astro:env/server'
 import HeroImage from '../components/HeroImage.astro'
 import ProjectCard from '../components/ProjectCard.astro'

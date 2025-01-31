@@ -1,4 +1,6 @@
 ---
+Astro.response.headers.set('Cache-Control', 'public, max-age=302400, s-maxage=151200')
+
 import Footer from '../components/Footer.astro'
 import Navigation from '../components/Navigation.astro'
 import '../styles/global.css'
@@ -131,7 +133,7 @@ export interface Props {
 		</header>
 
 		<main id='main-content' class='z-10' role='main'>
-			<div class='mx-auto mt-8 max-w-3xl px-16 pb-10 space-x-8'>
+			<div class='mx-auto mt-8 max-w-3xl space-x-8 px-16 pb-10'>
 				<article class='blog-content'>
 					<Prose>
 						<slot />
