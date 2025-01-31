@@ -8,7 +8,7 @@ import Layout from '../layouts/Layout.astro'
 const query = `
 {
   user(login: "jhalmu") {
-	repositories(first: 8, orderBy: {field: UPDATED_AT, direction: DESC}) {
+	repositories(first: 10, orderBy: {field: UPDATED_AT, direction: DESC}, isFork: false) {
 	  nodes {
 		name
 		description
@@ -113,6 +113,7 @@ try {
 			{
 				repositories.map((repo) => (
 					<ProjectCard
+						server:defer
 						name={repo.name}
 						updatedAt={repo.updatedAt}
 						title={repo.name}
