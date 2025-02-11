@@ -1,8 +1,15 @@
+import sanitizeHtml from 'sanitize-html';
+
 export function getContentPreview(content)
 {
+    // Sanitize input content
+    const sanitizedContent = sanitizeHtml(content, {
+        allowedTags: [],
+        allowedAttributes: {}
+    });
+
     // Remove HTML tags and markdown syntax
-    const cleanText = content
-        .replace(/<[^>]*>/g, '') // Remove HTML tags
+    const cleanText = sanitizedContent
         .replace(/[#*`_~\[\]]/g, '') // Remove markdown syntax
         .replace(/\n+/g, ' ') // Replace newlines with spaces
         .trim()
