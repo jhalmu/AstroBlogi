@@ -17,3 +17,11 @@ Removed pseudo posts. Well I don't have very much new content, but who cares. Th
 ## 15.1
 
 - Added Charts, data from coding stats.
+
+## 11.2.2025 
+
+- Updated new packages
+- Thinking github actions... version number. This is for go, but leaving link here
+- https://github.com/sikozonpc/GopherSocial/blob/main/.github/workflows/update-api-version.yaml
+- Blog is getting material, sry only in finnish now. 
+- Still thinking UI and mobile upgrade, but just thinking. I think that later when there is more blog posts which can be categorised, I do that sama time.
