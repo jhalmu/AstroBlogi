@@ -1,0 +1,18 @@
+---
+title: 'Nassia ja muuta rautaa'
+pubDate: '2025-03-25T01:48:14.334'
+author: 'Juha Halmu'
+description: ''
+tags: [Päiväkirjausta]
+---
+Olen tässä muutamat päivät tutkinut nasseja. Eli ulkoista tietovarastolaitosta sähköisen datan säilyttämiseen. No, ei minulla ole niin paljon dataa. Ehkä olisi ollut vain kiva yhdistää kaikki pienemmät säilyttimet yhdeksi. Mutta tulipahan aiheeseen tutustuttua. Niissä olisi kuulema kaikenlaisia lisätoimintojakin, varsinkin kalliimmissa. Mutta en vaan taas pystynyt keksimään tarvetta, mielikuvitus mennyt ja impulsiivisuus kuristettu. No, melkein. Siitä myöhemmin.
+
+Kerroinkin jossain mini-pc:stäni joka piti ärsyttävää ääntä. Se oli kovasti epäilyttävää.  Pieni tuuletinhan se oli syypää. Päästin kurjan virroista ja teippasin päälle serri-laatikosta takaisin ottamani tuulettimen, joka oli adaptoitu usb-virran syöttö. Kummasti hiljeni ja voipi olla että ilmansyöttokin parani kummasti. Paitsi että nyt kun automaatti-susbendi laittoi laitteen lepäämään, jäi tuuletin pyörimään. No, ei usb:stä niin paljon virtaa sille tule, että se ääntä pitäisi. Mikä onkaan sleeppi-moodi joka sulkisi usb:tkin. Pitää muutenkin tarkastella ajastusta kun nyt se menee pois klo 3 yöllä ja sen pitäisi herätä klo 7. Katsoo miten käy. Tämä pikkunassini pyörii Openmediavaultilla. Siellä näytti olevan lisäpalikoita muihinkin mahdollisuuksiin säätää heräämisiä. Olisipa minullakin sellaisia. Kello tulee neljä ja minä vaan naputan. Lisäsin siihen muuten jo yhden kotelollisen vanhaa pientä levyä. 
+
+Tietenkin nyt kun on tämä mac mini prö ja siinä kovasti reikiä työntää ulkoisia piuhanjatkeita ja sen perässä on vielä hubi jossa on lisää reikiä, että mikä onkaan se tarve siirtää niitä muualle? Alunperin kun oli läppäri, niin asian ymmärsi. Halusi olla potentiaalisesti vapaa. Sillai vaikka ei mihinkään menisi, niin voisi. Ulkoisten levyjen pois naputtaminen on niiin rasittavaa eikä yhtään tätä vuosituhatta, mutta applen kone valittaa jos näin ei tee. Pah. Senkin takia olisi ollut kiva olla yksi iso kiva nassi jossa olisi ollut sitä relisienssiä ja niitä lisätoimintoja. Mutta tulevaisuus on jo avoin. Nythän minä jo tarpeen taas itselleni perustelin. Paitsi että. 
+
+Minun piti tuosta vanhasta macbook airista vm 2015 tehdä nassi. No siihen ei paljon mene ulkoisia vermeitä. Ja taisin ehkä tilata siihen serr.... ei kun legacy-lisäosia. Onneksi tutulta yhdeltä foorumilta. FireWireä ja sillai. Nyt ei sillai tarttes. Tietenkin siihen olisi kiva saada palikka jolla saisi piuhalla internettiä kun se wi-fi tahtoo katketa kun kannen laittaa kiinni. Tosin en ole kerennyt vielä katsomaan että olisko siinä vipua, jonka hipulointi voisi auttaa asiaa. Tänään muuten ulkoilutin sitä kaupungilla kun se mahtuu mun sivulaukkuun. En kyllä jaksanut avata, eikö se niin pääasia. Ehtii sitten lämpimillä säillä enemmän.
+
+Ai niin tuli ehkä ostettua myös uusi vanha macbook pro. Vm 2019 mutta hyvät speksit. Kun halvalla sai ja myyjä väkisin halpuutti. Oli jo pakko ostaa jos vaikka linuxin laittais tahi jotain. Oli toki nassitkin mielessä ennen kuin korjasin mininassini. Että tälläistä. 
+
+Mitä tulee tuohon Mac Mini prööhön niin syntihän se on hitaita johdonpätkiä siinä kiinni pitää kun pöhinää pitäisi tulla TB5:den voimalla. Ja kunhan se tilaamani datapalikka maailmalta löytää kotiin, niin se pääsee TB4 -koteloon ja kylkeen ja sinne voi lykkiä sitten ohjelmia. Ja jaa... olenhan minä noita ohjelmiakin ladannut, niin ne pääsisi ulkoiselle myös. 
