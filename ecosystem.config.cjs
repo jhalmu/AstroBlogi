@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: "astro-build",
-      script: "pm2 flush && npm",
+      script: "pm2 flush && npm run build",
       args: "run build",
       watch: ["src/content/blog"],
       ignore_watch: ["node_modules", ".astro", "dist"],
