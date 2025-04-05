@@ -36,7 +36,7 @@ export async function GET()
 				title: post.data.title,
 				description: post.data.description,
 				pubDate: post.data.pubDate,
-				link: `${baseUrl}/blog/${getPostSlug(post.slug)}`,
+				link: `${baseUrl}/blog/${getPostSlug(post.id)}`,
 				content: sanitizeHtml(parser.render(post.body || '')),
 			})),
 			xmlns: {
